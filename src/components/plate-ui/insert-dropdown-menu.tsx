@@ -201,7 +201,7 @@ export function InsertDropdownMenu(props: DropdownMenuProps) {
                       default: {
                         insertEmptyElement(editor, type, {
                           select: true,
-                          nextBlock: true,
+                          // nextBlock: true,
                         });
                       }
                     }
