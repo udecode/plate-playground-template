@@ -4,22 +4,8 @@ A comprehensive playground template for building rich-text editors with [Plate](
 
 ## Usage
 
-Create a new Next.js 13 app with this template:
-
 ```bash
-npx create-next-app -e https://github.com/udecode/plate-playground-template
-```
-
-Install dependencies:
-
-```bash
-pnpm install
-```
-
-Run the development server:
-
-```bash
-pnpm dev
+pnpm create next-app -e https://github.com/udecode/plate-playground-template
 ```
 
 ## Features
