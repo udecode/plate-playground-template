@@ -47,6 +47,7 @@
     "@udecode/plate-kbd": "^22.0.1",
     "@udecode/plate-line-height": "^22.0.1",
     "@udecode/plate-link": "^22.0.1",
+    "@udecode/plate-list": "^22.0.1",
     "@udecode/plate-media": "^22.0.1",
     "@udecode/plate-mention": "^22.0.1",
     "@udecode/plate-node-id": "^22.0.1",

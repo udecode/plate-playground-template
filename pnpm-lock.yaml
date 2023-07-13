@@ -115,6 +115,9 @@ dependencies:
   '@udecode/plate-link':
     specifier: ^22.0.1
     version: 22.0.1(@babel/core@7.22.9)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.93.0)(slate-react@0.97.2)(slate@0.94.1)
+  '@udecode/plate-list':
+    specifier: ^22.0.1
+    version: 22.0.1(@babel/core@7.22.9)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.93.0)(slate-react@0.97.2)(slate@0.94.1)
   '@udecode/plate-media':
     specifier: ^22.0.1
     version: 22.0.1(@babel/core@7.22.9)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.93.0)(slate-react@0.97.2)(slate@0.94.1)

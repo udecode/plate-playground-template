@@ -42,6 +42,7 @@ import {
   PlateLeaf,
   RenderAfterEditable,
   someNode,
+  withProps,
 } from '@udecode/plate-common';
 import { createDndPlugin } from '@udecode/plate-dnd';
 import { createEmojiPlugin } from '@udecode/plate-emoji';
@@ -118,7 +119,6 @@ import {
   ELEMENT_TR,
 } from '@udecode/plate-table';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
-import { withProps } from '@udecode/plate-utils';
 
 import { autoformatPlugin } from '@/lib/plate/autoformatPlugin';
 import { dragOverCursorPlugin } from '@/lib/plate/dragOverCursorPlugin';
