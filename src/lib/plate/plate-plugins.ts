@@ -1,13 +1,6 @@
 import { createAlignPlugin } from '@udecode/plate-alignment';
 import { createAutoformatPlugin } from '@udecode/plate-autoformat';
 import {
-  MARK_BOLD,
-  MARK_CODE,
-  MARK_ITALIC,
-  MARK_STRIKETHROUGH,
-  MARK_SUBSCRIPT,
-  MARK_SUPERSCRIPT,
-  MARK_UNDERLINE,
   createBoldPlugin,
   createCodePlugin,
   createItalicPlugin,
@@ -15,39 +8,46 @@ import {
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
+  MARK_BOLD,
+  MARK_CODE,
+  MARK_ITALIC,
+  MARK_STRIKETHROUGH,
+  MARK_SUBSCRIPT,
+  MARK_SUPERSCRIPT,
+  MARK_UNDERLINE,
 } from '@udecode/plate-basic-marks';
 import {
-  ELEMENT_BLOCKQUOTE,
   createBlockquotePlugin,
+  ELEMENT_BLOCKQUOTE,
 } from '@udecode/plate-block-quote';
 import {
   createExitBreakPlugin,
   createSoftBreakPlugin,
 } from '@udecode/plate-break';
 import {
+  createCodeBlockPlugin,
   ELEMENT_CODE_BLOCK,
   ELEMENT_CODE_LINE,
   ELEMENT_CODE_SYNTAX,
-  createCodeBlockPlugin,
   isCodeBlockEmpty,
   isSelectionAtCodeBlockStart,
   unwrapCodeBlock,
 } from '@udecode/plate-code-block';
 import { createComboboxPlugin } from '@udecode/plate-combobox';
-import { MARK_COMMENT, createCommentsPlugin } from '@udecode/plate-comments';
+import { createCommentsPlugin, MARK_COMMENT } from '@udecode/plate-comments';
 import {
-  PlateLeaf,
-  RenderAfterEditable,
   createPlugins,
   isBlockAboveEmpty,
   isSelectionAtBlockStart,
+  PlateLeaf,
+  RenderAfterEditable,
   someNode,
 } from '@udecode/plate-common';
 import { createDndPlugin } from '@udecode/plate-dnd';
 import { createEmojiPlugin } from '@udecode/plate-emoji';
 import {
-  ELEMENT_EXCALIDRAW,
   createExcalidrawPlugin,
+  ELEMENT_EXCALIDRAW,
 } from '@udecode/plate-excalidraw';
 import {
   createFontBackgroundColorPlugin,
@@ -55,6 +55,7 @@ import {
   createFontSizePlugin,
 } from '@udecode/plate-font';
 import {
+  createHeadingPlugin,
   ELEMENT_H1,
   ELEMENT_H2,
   ELEMENT_H3,
@@ -62,47 +63,46 @@ import {
   ELEMENT_H5,
   ELEMENT_H6,
   KEYS_HEADING,
-  createHeadingPlugin,
 } from '@udecode/plate-heading';
 import {
-  MARK_HIGHLIGHT,
   createHighlightPlugin,
+  MARK_HIGHLIGHT,
 } from '@udecode/plate-highlight';
 import {
-  ELEMENT_HR,
   createHorizontalRulePlugin,
+  ELEMENT_HR,
 } from '@udecode/plate-horizontal-rule';
 import { createIndentPlugin } from '@udecode/plate-indent';
 import {
-  KEY_LIST_STYLE_TYPE,
   createIndentListPlugin,
+  KEY_LIST_STYLE_TYPE,
 } from '@udecode/plate-indent-list';
 import { createJuicePlugin } from '@udecode/plate-juice';
-import { MARK_KBD, createKbdPlugin } from '@udecode/plate-kbd';
+import { createKbdPlugin, MARK_KBD } from '@udecode/plate-kbd';
 import { createLineHeightPlugin } from '@udecode/plate-line-height';
-import { ELEMENT_LINK, createLinkPlugin } from '@udecode/plate-link';
+import { createLinkPlugin, ELEMENT_LINK } from '@udecode/plate-link';
 import {
+  createTodoListPlugin,
   ELEMENT_LI,
   ELEMENT_OL,
   ELEMENT_TODO_LI,
   ELEMENT_UL,
-  createTodoListPlugin,
 } from '@udecode/plate-list';
 import {
-  ELEMENT_IMAGE,
-  ELEMENT_MEDIA_EMBED,
   createImagePlugin,
   createMediaEmbedPlugin,
+  ELEMENT_IMAGE,
+  ELEMENT_MEDIA_EMBED,
 } from '@udecode/plate-media';
 import {
+  createMentionPlugin,
   ELEMENT_MENTION,
   ELEMENT_MENTION_INPUT,
-  createMentionPlugin,
 } from '@udecode/plate-mention';
 import { createNodeIdPlugin } from '@udecode/plate-node-id';
 import {
-  ELEMENT_PARAGRAPH,
   createParagraphPlugin,
+  ELEMENT_PARAGRAPH,
 } from '@udecode/plate-paragraph';
 import { createResetNodePlugin } from '@udecode/plate-reset-node';
 import { createSelectOnBackspacePlugin } from '@udecode/plate-select';
@@ -111,11 +111,11 @@ import { createDeserializeDocxPlugin } from '@udecode/plate-serializer-docx';
 import { createDeserializeMdPlugin } from '@udecode/plate-serializer-md';
 import { createTabbablePlugin } from '@udecode/plate-tabbable';
 import {
+  createTablePlugin,
   ELEMENT_TABLE,
   ELEMENT_TD,
   ELEMENT_TH,
   ELEMENT_TR,
-  createTablePlugin,
 } from '@udecode/plate-table';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 import { withProps } from '@udecode/plate-utils';
@@ -143,7 +143,6 @@ import { MentionElement } from '@/components/plate-ui/mention-element';
 import { MentionInputElement } from '@/components/plate-ui/mention-input-element';
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
 import { withPlaceholders } from '@/components/plate-ui/placeholder';
-import { SearchHighlightLeaf } from '@/components/plate-ui/search-highlight-leaf';
 import {
   TableCellElement,
   TableCellHeaderElement,
