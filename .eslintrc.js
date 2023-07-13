@@ -23,6 +23,7 @@ module.exports = {
         vars: 'all',
         varsIgnorePattern: '^_',
         args: 'none',
+        argsIgnorePattern: '^_',
       },
     ],
   },
