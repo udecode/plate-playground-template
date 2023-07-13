@@ -49,7 +49,6 @@ import {
   ELEMENT_EXCALIDRAW,
   createExcalidrawPlugin,
 } from '@udecode/plate-excalidraw';
-import { MARK_SEARCH_HIGHLIGHT } from '@udecode/plate-find-replace';
 import {
   createFontBackgroundColorPlugin,
   createFontColorPlugin,
@@ -391,7 +390,6 @@ export const plugins = createPlugins(
         [MARK_HIGHLIGHT]: HighlightLeaf,
         [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
         [MARK_KBD]: KbdLeaf,
-        [MARK_SEARCH_HIGHLIGHT]: SearchHighlightLeaf,
         [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
         [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
         [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
