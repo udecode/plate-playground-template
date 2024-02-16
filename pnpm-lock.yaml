@@ -196,7 +196,7 @@ dependencies:
     version: 18.2.0
   react-dnd:
     specifier: ^16.0.1
-    version: 16.0.1(@types/node@20.11.16)(@types/react@18.2.55)(react@18.2.0)
+    version: 16.0.1(@types/node@20.11.17)(@types/react@18.2.55)(react@18.2.0)
   react-dnd-html5-backend:
     specifier: ^16.0.1
     version: 16.0.1
@@ -233,8 +233,8 @@ devDependencies:
     specifier: ^4.1.1
     version: 4.1.1(prettier@3.2.5)
   '@types/node':
-    specifier: ^20.11.16
-    version: 20.11.16
+    specifier: ^20.11.17
+    version: 20.11.17
   '@types/react':
     specifier: ^18.2.55
     version: 18.2.55
@@ -1811,8 +1811,8 @@ packages:
       '@types/unist': 2.0.10
     dev: false
 
-  /@types/node@20.11.16:
-    resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
+  /@types/node@20.11.17:
+    resolution: {integrity: sha512-QmgQZGWu1Yw9TDyAP9ZzpFJKynYNeOvwMJmaxABfieQoVoiVOS6MN1WSpqpRcbeA5+RW82kraAVxCCJg+780Qw==}
     dependencies:
       undici-types: 5.26.5
 
@@ -2249,7 +2249,7 @@ packages:
       lodash: 4.17.21
       raf: 3.4.1
       react: 18.2.0
-      react-dnd: 16.0.1(@types/node@20.11.16)(@types/react@18.2.55)(react@18.2.0)
+      react-dnd: 16.0.1(@types/node@20.11.17)(@types/react@18.2.55)(react@18.2.0)
       react-dnd-html5-backend: 16.0.1
       react-dom: 18.2.0(react@18.2.0)
       slate: 0.102.0
@@ -5671,7 +5671,7 @@ packages:
       dnd-core: 16.0.1
     dev: false
 
-  /react-dnd@16.0.1(@types/node@20.11.16)(@types/react@18.2.55)(react@18.2.0):
+  /react-dnd@16.0.1(@types/node@20.11.17)(@types/react@18.2.55)(react@18.2.0):
     resolution: {integrity: sha512-QeoM/i73HHu2XF9aKksIUuamHPDvRglEwdHL4jsp784BgUuWcg6mzfxT0QDdQz8Wj0qyRKx2eMg8iZtWvU4E2Q==}
     peerDependencies:
       '@types/hoist-non-react-statics': '>= 3.3.1'
@@ -5688,7 +5688,7 @@ packages:
     dependencies:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
-      '@types/node': 20.11.16
+      '@types/node': 20.11.17
       '@types/react': 18.2.55
       dnd-core: 16.0.1
       fast-deep-equal: 3.1.3
