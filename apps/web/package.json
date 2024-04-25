@@ -1,0 +1,58 @@
+{
+  "name": "@x/web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "preview": "next build && next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@udecode/cn": "^29.0.1",
+    "@udecode/plate-common": "^31.3.2",
+    "@x/plate-editor": "workspace:*",
+    "eslint-plugin-prettier": "^5.1.3",
+    "lucide-react": "0.323.0",
+    "next": "^14.1.0",
+    "next-themes": "^0.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "slate-react": "0.102.0",
+    "tailwind-merge": "2.2.1"
+  },
+  "devDependencies": {
+    "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
+    "@types/node": "^20.11.16",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@x/config": "workspace:*",
+    "autoprefixer": "^10.4.17",
+    "encoding": "^0.1.13",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-tailwindcss": "^3.14.2",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "postcss": "^8.4.34",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.4.2"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": [
+        "react",
+        "react-dom"
+      ],
+      "ignoreMissing": [
+        "scheduler"
+      ]
+    }
+  }
+}

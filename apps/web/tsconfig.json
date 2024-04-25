@@ -1,0 +1,15 @@
+{
+  "extends": "@x/config/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "preserve",
+    "baseUrl": "./src",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["./next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "tailwind.config.js"],
+  "exclude": ["node_modules"]
+}
