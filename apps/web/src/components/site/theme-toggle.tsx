@@ -2,9 +2,8 @@
 
 import * as React from 'react';
 import { useTheme } from 'next-themes';
-
-import { Icons } from '../../../packages/plate-editor/components/icons';
-import { Button } from '../../../packages/plate-editor/components/button';
+import { Icons } from '@x/plate-editor/components/icons';
+import { Button } from '@x/plate-editor/components/button';
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme();
@@ -15,8 +14,8 @@ export function ThemeToggle() {
       size="sm"
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
     >
-      <Icons.sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-      <Icons.moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <Icons.sun className="transition-all scale-100 rotate-0 dark:-rotate-90 dark:scale-0" />
+      <Icons.moon className="absolute transition-all scale-0 rotate-90 dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

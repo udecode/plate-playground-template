@@ -12,7 +12,7 @@ import { ListStyleType } from '@udecode/plate-indent-list';
 import { ELEMENT_IMAGE } from '@udecode/plate-media';
 
 import { Icons, iconVariants } from './icons';
-import { AlignDropdownMenu } from '@/components/plate-ui/align-dropdown-menu';
+import { AlignDropdownMenu } from './align-dropdown-menu';
 import { ColorDropdownMenu } from './color-dropdown-menu';
 import { CommentToolbarButton } from './comment-toolbar-button';
 import { EmojiDropdownMenu } from './emoji-dropdown-menu';

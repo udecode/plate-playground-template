@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { cn } from '@udecode/cn';
+import { Icons } from '@x/plate-editor/components/icons';
 
-import { NavItem } from '@/types/nav';
-import { siteConfig } from '@/config/site';
-import { Icons } from '../../../packages/plate-editor/components/icons';
+import { NavItem } from '../../types/nav';
+import { siteConfig } from '../../config/site';
 
 interface MainNavProps {
   items?: NavItem[];

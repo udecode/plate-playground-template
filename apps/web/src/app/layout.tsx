@@ -1,11 +1,11 @@
 import { cn } from '@udecode/cn';
 
-import { siteConfig } from '@/config/site';
-import { fontSans } from '@/lib/fonts';
-import { TooltipProvider } from '../../packages/plate-editor/components/tooltip';
-import { SiteHeader } from '@/components/site/site-header';
-import { TailwindIndicator } from '@/components/site/tailwind-indicator';
-import { ThemeProvider } from '@/components/site/theme-provider';
+import { siteConfig } from '../config/site';
+import { fontSans } from '../lib/fonts';
+import { TooltipProvider } from '@x/plate-editor/components/tooltip';
+import { SiteHeader } from '../components/site/site-header';
+import { TailwindIndicator } from '../components/site/tailwind-indicator';
+import { ThemeProvider } from '../components/site/theme-provider';
 
 import '@/styles/globals.css';
 
@@ -53,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               delayDuration={500}
               skipDelayDuration={0}
             >
-              <div className="relative flex min-h-screen flex-col">
+              <div className="relative flex flex-col min-h-screen">
                 <SiteHeader />
                 <div className="flex-1">{children}</div>
               </div>

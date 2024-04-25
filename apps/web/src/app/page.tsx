@@ -1,12 +1,12 @@
 import Link from 'next/link';
+import { buttonVariants } from '@x/plate-editor/components/button';
+import PlateEditor from '@x/plate-editor/src/plate-editor';
 
-import { siteConfig } from '@/config/site';
-import PlateEditor from '@/components/plate-editor';
-import { buttonVariants } from '../../packages/plate-editor/components/button';
+import { siteConfig } from '../config/site';
 
 export default function IndexPage() {
   return (
-    <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <section className="container grid items-center gap-6 pt-6 pb-8 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-2">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter md:text-4xl">
           Plate Playground.
