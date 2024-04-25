@@ -153,7 +153,7 @@ import { TableElement } from '../components/table-element';
 import { TableRowElement } from '../components/table-row-element';
 import { TodoListElement } from '../components/todo-list-element';
 import { withDraggables } from '../components/with-draggables';
-import { TabbableElement } from '../../../apps/web/src/components/tabbable-element';
+import { TabbableElement } from '../components/tabbable-element';
 
 const resetBlockTypesCommonRule = {
   types: [ELEMENT_BLOCKQUOTE, ELEMENT_TODO_LI],
