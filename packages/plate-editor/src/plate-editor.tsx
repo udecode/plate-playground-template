@@ -8,17 +8,18 @@ import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { commentsUsers, myUserId } from '@/lib/plate/comments';
-import { MENTIONABLES } from '@/lib/plate/mentionables';
-import { plugins } from '@/lib/plate/plate-plugins';
-import { CommentsPopover } from '../../packages/plate-editor/components/comments-popover';
-import { CursorOverlay } from '../../packages/plate-editor/components/cursor-overlay';
-import { Editor } from '../../packages/plate-editor/components/editor';
-import { FixedToolbar } from '../../packages/plate-editor/components/fixed-toolbar';
-import { FixedToolbarButtons } from '../../packages/plate-editor/components/fixed-toolbar-buttons';
-import { FloatingToolbar } from '../../packages/plate-editor/components/floating-toolbar';
-import { FloatingToolbarButtons } from '../../packages/plate-editor/components/floating-toolbar-buttons';
-import { MentionCombobox } from '../../packages/plate-editor/components/mention-combobox';
+import { commentsUsers, myUserId } from '../lib/comments';
+import { MENTIONABLES } from '../lib/mentionables';
+import { plugins } from '../lib/plate-plugins';
+
+import { CommentsPopover } from '../components/comments-popover';
+import { CursorOverlay } from '../components/cursor-overlay';
+import { Editor } from '../components/editor';
+import { FixedToolbar } from '../components/fixed-toolbar';
+import { FixedToolbarButtons } from '../components/fixed-toolbar-buttons';
+import { FloatingToolbar } from '../components/floating-toolbar';
+import { FloatingToolbarButtons } from '../components/floating-toolbar-buttons';
+import { MentionCombobox } from '../components/mention-combobox';
 
 export default function PlateEditor() {
   const containerRef = useRef(null);

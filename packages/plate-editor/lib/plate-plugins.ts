@@ -122,37 +122,37 @@ import {
 } from '@udecode/plate-table';
 import { createTrailingBlockPlugin } from '@udecode/plate-trailing-block';
 
-import { autoformatPlugin } from '@/lib/plate/autoformatPlugin';
-import { dragOverCursorPlugin } from '@/lib/plate/dragOverCursorPlugin';
-import { BlockquoteElement } from '../../../packages/plate-editor/components/blockquote-element';
-import { CodeBlockElement } from '../../../packages/plate-editor/components/code-block-element';
-import { CodeLeaf } from '../../../packages/plate-editor/components/code-leaf';
-import { CodeLineElement } from '../../../packages/plate-editor/components/code-line-element';
-import { CodeSyntaxLeaf } from '../../../packages/plate-editor/components/code-syntax-leaf';
-import { CommentLeaf } from '../../../packages/plate-editor/components/comment-leaf';
-import { EmojiCombobox } from '../../../packages/plate-editor/components/emoji-combobox';
-import { ExcalidrawElement } from '../../../packages/plate-editor/components/excalidraw-element';
-import { HeadingElement } from '../../../packages/plate-editor/components/heading-element';
-import { HighlightLeaf } from '../../../packages/plate-editor/components/highlight-leaf';
-import { HrElement } from '../../../packages/plate-editor/components/hr-element';
-import { ImageElement } from '../../../packages/plate-editor/components/image-element';
-import { KbdLeaf } from '../../../packages/plate-editor/components/kbd-leaf';
-import { LinkElement } from '../../../packages/plate-editor/components/link-element';
-import { LinkFloatingToolbar } from '../../../packages/plate-editor/components/link-floating-toolbar';
-import { ListElement } from '../../../packages/plate-editor/components/list-element';
-import { MediaEmbedElement } from '../../../packages/plate-editor/components/media-embed-element';
-import { MentionElement } from '../../../packages/plate-editor/components/mention-element';
-import { MentionInputElement } from '../../../packages/plate-editor/components/mention-input-element';
-import { ParagraphElement } from '../../../packages/plate-editor/components/paragraph-element';
-import { withPlaceholders } from '../../../packages/plate-editor/components/placeholder';
+import { autoformatPlugin } from './autoformatPlugin';
+import { dragOverCursorPlugin } from './dragOverCursorPlugin';
+import { BlockquoteElement } from '../components/blockquote-element';
+import { CodeBlockElement } from '../components/code-block-element';
+import { CodeLeaf } from '../components/code-leaf';
+import { CodeLineElement } from '../components/code-line-element';
+import { CodeSyntaxLeaf } from '../components/code-syntax-leaf';
+import { CommentLeaf } from '../components/comment-leaf';
+import { EmojiCombobox } from '../components/emoji-combobox';
+import { ExcalidrawElement } from '../components/excalidraw-element';
+import { HeadingElement } from '../components/heading-element';
+import { HighlightLeaf } from '../components/highlight-leaf';
+import { HrElement } from '../components/hr-element';
+import { ImageElement } from '../components/image-element';
+import { KbdLeaf } from '../components/kbd-leaf';
+import { LinkElement } from '../components/link-element';
+import { LinkFloatingToolbar } from '../components/link-floating-toolbar';
+import { ListElement } from '../components/list-element';
+import { MediaEmbedElement } from '../components/media-embed-element';
+import { MentionElement } from '../components/mention-element';
+import { MentionInputElement } from '../components/mention-input-element';
+import { ParagraphElement } from '../components/paragraph-element';
+import { withPlaceholders } from '../components/placeholder';
 import {
   TableCellElement,
   TableCellHeaderElement,
-} from '../../../packages/plate-editor/components/table-cell-element';
-import { TableElement } from '../../../packages/plate-editor/components/table-element';
-import { TableRowElement } from '../../../packages/plate-editor/components/table-row-element';
-import { TodoListElement } from '../../../packages/plate-editor/components/todo-list-element';
-import { withDraggables } from '../../../packages/plate-editor/components/with-draggables';
+} from '../components/table-cell-element';
+import { TableElement } from '../components/table-element';
+import { TableRowElement } from '../components/table-row-element';
+import { TodoListElement } from '../components/todo-list-element';
+import { withDraggables } from '../components/with-draggables';
 import { TabbableElement } from '@/components/tabbable-element';
 
 const resetBlockTypesCommonRule = {

@@ -4,7 +4,7 @@ import { cn } from '@udecode/cn';
 
 import { NavItem } from '@/types/nav';
 import { siteConfig } from '@/config/site';
-import { Icons } from '@/components/icons';
+import { Icons } from '../../../packages/plate-editor/components/icons';
 
 interface MainNavProps {
   items?: NavItem[];

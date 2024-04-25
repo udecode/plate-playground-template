@@ -2,7 +2,7 @@ import { cn } from '@udecode/cn';
 
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
-import { TooltipProvider } from '@/components/plate-ui/tooltip';
+import { TooltipProvider } from '../../packages/plate-editor/components/tooltip';
 import { SiteHeader } from '@/components/site/site-header';
 import { TailwindIndicator } from '@/components/site/tailwind-indicator';
 import { ThemeProvider } from '@/components/site/theme-provider';
