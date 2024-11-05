@@ -13,6 +13,7 @@ import {
   autoformatPunctuation,
   autoformatSmartQuotes,
 } from '@udecode/plate-autoformat';
+import { AutoformatPlugin } from '@udecode/plate-autoformat/react';
 import {
   BoldPlugin,
   CodePlugin,
@@ -242,7 +243,7 @@ export const autoformatLists: AutoformatRule[] = [
   },
   {
     format: (editor) => formatList(editor, NumberedListPlugin.key),
-    match: ['^\\d+\\.$ ', '^\\d+\\)$ '],
+    match: [String.raw`^\d+\.$ `, String.raw`^\d+\)$ `],
     matchByRegex: true,
     mode: 'block',
     preFormat,
@@ -284,7 +285,7 @@ export const autoformatIndentLists: AutoformatRule[] = [
       toggleIndentList(editor, {
         listStyleType: ListStyleType.Decimal,
       }),
-    match: ['^\\d+\\.$ ', '^\\d+\\)$ '],
+    match: [String.raw`^\d+\.$ `, String.raw`^\d+\)$ `],
     matchByRegex: true,
     mode: 'block',
     type: 'list',
@@ -319,14 +320,20 @@ export const autoformatIndentLists: AutoformatRule[] = [
   },
 ];
 
-export const autoformatRules: AutoformatRule[] = [
-  ...autoformatBlocks,
-  ...autoformatMarks,
-  ...autoformatSmartQuotes,
-  ...autoformatPunctuation,
-  ...autoformatLegal,
-  ...autoformatLegalHtml,
-  ...autoformatArrow,
-  ...autoformatMath,
-  ...autoformatIndentLists,
-];
+export const autoformatPlugin = AutoformatPlugin.configure({
+  options: {
+    enableUndoOnDelete: true,
+    rules: [
+      ...autoformatBlocks,
+      ...autoformatMarks,
+      ...autoformatSmartQuotes,
+      ...autoformatPunctuation,
+      ...autoformatLegal,
+      ...autoformatLegalHtml,
+      ...autoformatArrow,
+      ...autoformatMath,
+      // Use autoformatLists instead if using ListPlugin
+      ...autoformatIndentLists,
+    ],
+  },
+});
