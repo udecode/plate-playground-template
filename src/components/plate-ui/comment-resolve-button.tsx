@@ -1,13 +1,12 @@
 'use client';
 
-import React from 'react';
-
 import { cn } from '@udecode/cn';
 import {
   CommentResolveButton as CommentResolveButtonPrimitive,
   useComment,
 } from '@udecode/plate-comments/react';
 import { Check, RotateCcw } from 'lucide-react';
+import React from 'react';
 
 import { buttonVariants } from './button';
 

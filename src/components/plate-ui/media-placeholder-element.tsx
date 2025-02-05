@@ -1,25 +1,22 @@
 'use client';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import type { ReactNode } from 'react';
-
-import type { TPlaceholderElement } from '@udecode/plate-media';
-
+import { useUploadFile } from '@/lib/uploadthing';
 import { cn } from '@udecode/cn';
-import { useEditorPlugin, withHOC, withRef } from '@udecode/plate/react';
+import type { TPlaceholderElement } from '@udecode/plate-media';
 import {
   AudioPlugin,
   FilePlugin,
   ImagePlugin,
   PlaceholderPlugin,
   PlaceholderProvider,
-  VideoPlugin,
   updateUploadHistory,
+  VideoPlugin,
 } from '@udecode/plate-media/react';
+import { useEditorPlugin, withHOC, withRef } from '@udecode/plate/react';
 import { AudioLines, FileUp, Film, ImageIcon } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import { useFilePicker } from 'use-file-picker';
-
-import { useUploadFile } from '@/lib/uploadthing';
 
 import { PlateElement } from './plate-element';
 import { Spinner } from './spinner';
@@ -63,7 +60,7 @@ export const MediaPlaceholderElement = withHOC(
 
       const { api } = useEditorPlugin(PlaceholderPlugin);
 
-      const { isUploading, progress, uploadFile, uploadedFile, uploadingFile } =
+      const { isUploading, progress, uploadedFile, uploadFile, uploadingFile } =
         useUploadFile();
 
       const loading = isUploading && uploadingFile;
@@ -72,7 +69,7 @@ export const MediaPlaceholderElement = withHOC(
 
       const isImage = element.mediaType === ImagePlugin.key;
 
-      const imageRef = useRef<HTMLImageElement>(null);
+      const imageRef = useRef<HTMLImageElement>(null!);
 
       const { openFilePicker } = useFilePicker({
         accept: currentContent.accept,
@@ -120,7 +117,6 @@ export const MediaPlaceholderElement = withHOC(
         });
 
         api.placeholder.removeUploadingFile(element.id as string);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [uploadedFile, element.id]);
 
       // React dev mode will call useEffect twice
@@ -138,19 +134,17 @@ export const MediaPlaceholderElement = withHOC(
         if (!currentFiles) return;
 
         replaceCurrentPlaceholder(currentFiles);
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [isReplaced]);
 
       return (
-        <PlateElement ref={ref} className={cn(className, 'my-1')} {...props}>
+        <PlateElement className={cn(className, 'my-1')} ref={ref} {...props}>
           {(!loading || !isImage) && (
             <div
               className={cn(
                 'flex cursor-pointer select-none items-center rounded-sm bg-muted p-3 pr-9 hover:bg-primary/10'
               )}
-              onClick={() => !loading && openFilePicker()}
               contentEditable={false}
+              onClick={() => !loading && openFilePicker()}
             >
               <div className="relative mr-3 flex text-muted-foreground/80 [&_svg]:size-6">
                 {currentContent.icon}
@@ -189,6 +183,29 @@ export const MediaPlaceholderElement = withHOC(
   )
 );
 
+export function formatBytes(
+  bytes: number,
+  opts: {
+    decimals?: number;
+    sizeType?: 'accurate' | 'normal';
+  } = {}
+) {
+  const { decimals = 0, sizeType = 'normal' } = opts;
+
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
+
+  if (bytes === 0) return '0 Byte';
+
+  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+
+  return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
+    sizeType === 'accurate'
+      ? (accurateSizes[i] ?? 'Bytest')
+      : (sizes[i] ?? 'Bytes')
+  }`;
+}
+
 export function ImageProgress({
   className,
   file,
@@ -218,9 +235,9 @@ export function ImageProgress({
   return (
     <div className={cn('relative', className)} contentEditable={false}>
       <img
-        ref={imageRef}
-        className="h-auto w-full rounded-sm object-cover"
         alt={file.name}
+        className="h-auto w-full rounded-sm object-cover"
+        ref={imageRef}
         src={objectUrl}
       />
       {progress < 100 && (
@@ -233,27 +250,4 @@ export function ImageProgress({
       )}
     </div>
   );
-}
-
-export function formatBytes(
-  bytes: number,
-  opts: {
-    decimals?: number;
-    sizeType?: 'accurate' | 'normal';
-  } = {}
-) {
-  const { decimals = 0, sizeType = 'normal' } = opts;
-
-  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-  const accurateSizes = ['Bytes', 'KiB', 'MiB', 'GiB', 'TiB'];
-
-  if (bytes === 0) return '0 Byte';
-
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
-
-  return `${(bytes / Math.pow(1024, i)).toFixed(decimals)} ${
-    sizeType === 'accurate'
-      ? (accurateSizes[i] ?? 'Bytest')
-      : (sizes[i] ?? 'Bytes')
-  }`;
 }

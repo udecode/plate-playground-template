@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react';
-
 import type { WithRequiredKey } from '@udecode/plate';
-
+import {
+  floatingMediaActions,
+  FloatingMedia as FloatingMediaPrimitive,
+  useFloatingMediaSelectors,
+} from '@udecode/plate-media/react';
 import {
   useEditorSelector,
   useElement,
@@ -11,12 +13,8 @@ import {
   useRemoveNodeButton,
   useSelected,
 } from '@udecode/plate/react';
-import {
-  FloatingMedia as FloatingMediaPrimitive,
-  floatingMediaActions,
-  useFloatingMediaSelectors,
-} from '@udecode/plate-media/react';
 import { Link, Trash2Icon } from 'lucide-react';
+import React, { useEffect } from 'react';
 
 import { Button, buttonVariants } from './button';
 import { CaptionButton } from './caption';
@@ -44,7 +42,6 @@ export function MediaPopover({ children, plugin }: MediaPopoverProps) {
     if (!isOpen && isEditing) {
       floatingMediaActions.isEditing(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   const element = useElement();
@@ -53,7 +50,7 @@ export function MediaPopover({ children, plugin }: MediaPopoverProps) {
   if (readOnly) return <>{children}</>;
 
   return (
-    <Popover open={isOpen} modal={false}>
+    <Popover modal={false} open={isOpen}>
       <PopoverAnchor>{children}</PopoverAnchor>
 
       <PopoverContent
@@ -69,8 +66,8 @@ export function MediaPopover({ children, plugin }: MediaPopoverProps) {
 
               <FloatingMediaPrimitive.UrlInput
                 className={inputVariants({ h: 'sm', variant: 'ghost' })}
-                placeholder="Paste the embed link..."
                 options={{ plugin }}
+                placeholder="Paste the embed link..."
               />
             </div>
           </div>
@@ -84,7 +81,7 @@ export function MediaPopover({ children, plugin }: MediaPopoverProps) {
 
             <CaptionButton variant="ghost">Caption</CaptionButton>
 
-            <Separator orientation="vertical" className="mx-1 h-6" />
+            <Separator className="mx-1 h-6" orientation="vertical" />
 
             <Button size="icon" variant="ghost" {...buttonProps}>
               <Trash2Icon />

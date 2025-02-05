@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
-
 import { cn } from '@udecode/cn';
 import { useBlockSelected } from '@udecode/plate-selection/react';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
 
 export const blockSelectionVariants = cva(
   'pointer-events-none absolute inset-0 z-[1] bg-brand/[.13] transition-opacity',

@@ -1,15 +1,13 @@
 'use client';
 
-import React from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import {
   useEditorReadOnly,
   useEditorRef,
   usePlateStore,
 } from '@udecode/plate/react';
 import { Eye, Pen } from 'lucide-react';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -50,17 +48,16 @@ export function ModeDropdownMenu(props: DropdownMenuProps) {
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton
+          isDropdown
           pressed={openState.open}
           tooltip="Editing mode"
-          isDropdown
         >
           {item[value]}
         </ToolbarButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="min-w-[180px]" align="start">
+      <DropdownMenuContent align="start" className="min-w-[180px]">
         <DropdownMenuRadioGroup
-          value={value}
           onValueChange={(newValue) => {
             if (newValue !== 'viewing') {
               setReadOnly(false);
@@ -76,6 +73,7 @@ export function ModeDropdownMenu(props: DropdownMenuProps) {
               return;
             }
           }}
+          value={value}
         >
           <DropdownMenuRadioItem value="editing">
             {item.editing}

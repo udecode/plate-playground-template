@@ -1,17 +1,14 @@
 'use client';
 
-import React, { useCallback, useState } from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import { isUrl } from '@udecode/plate';
-import { useEditorRef } from '@udecode/plate/react';
 import {
   AudioPlugin,
   FilePlugin,
   ImagePlugin,
   VideoPlugin,
 } from '@udecode/plate-media/react';
+import { useEditorRef } from '@udecode/plate/react';
 import {
   AudioLinesIcon,
   FileUpIcon,
@@ -19,6 +16,7 @@ import {
   ImageIcon,
   LinkIcon,
 } from 'lucide-react';
+import React, { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import { useFilePicker } from 'use-file-picker';
 
@@ -51,8 +49,8 @@ const MEDIA_CONFIG: Record<
   string,
   {
     accept: string[];
-    icon: React.ReactNode;
     title: string;
+    icon: React.ReactNode;
     tooltip: string;
   }
 > = {
@@ -125,9 +123,9 @@ export function MediaToolbarButton({
           </DropdownMenuTrigger>
 
           <DropdownMenuContent
-            onClick={(e) => e.stopPropagation()}
             align="start"
             alignOffset={-32}
+            onClick={(e) => e.stopPropagation()}
           >
             <DropdownMenuGroup>
               <DropdownMenuItem onSelect={() => openFilePicker()}>
@@ -144,10 +142,10 @@ export function MediaToolbarButton({
       </ToolbarSplitButton>
 
       <AlertDialog
-        open={dialogOpen}
         onOpenChange={(value) => {
           setDialogOpen(value);
         }}
+        open={dialogOpen}
       >
         <AlertDialogContent className="gap-6">
           <MediaUrlDialogContent
@@ -166,9 +164,9 @@ function MediaUrlDialogContent({
   nodeType,
   setOpen,
 }: {
+  setOpen: (value: boolean) => void;
   currentConfig: (typeof MEDIA_CONFIG)[string];
   nodeType: string;
-  setOpen: (value: boolean) => void;
 }) {
   const editor = useEditorRef();
   const [url, setUrl] = useState('');
@@ -193,17 +191,17 @@ function MediaUrlDialogContent({
 
       <AlertDialogDescription className="group relative w-full">
         <FloatingInput
-          id="url"
+          autoFocus
           className="w-full"
-          value={url}
+          id="url"
+          label="URL"
           onChange={(e) => setUrl(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') embedMedia();
           }}
-          label="URL"
           placeholder=""
           type="url"
-          autoFocus
+          value={url}
         />
       </AlertDialogDescription>
 

@@ -1,10 +1,8 @@
-import React from 'react';
-
-import type { SlateElementProps } from '@udecode/plate';
-
 import { cn } from '@udecode/cn';
+import type { SlateElementProps } from '@udecode/plate';
 import { SlateElement } from '@udecode/plate';
-import { type TTableCellElement, BaseTablePlugin } from '@udecode/plate-table';
+import { BaseTablePlugin, type TTableCellElement } from '@udecode/plate-table';
+import React from 'react';
 
 export function TableCellElementStatic({
   children,

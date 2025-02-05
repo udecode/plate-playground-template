@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { withVariants } from '@udecode/cn';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
 
 export const inputVariants = cva(
   'flex w-full rounded-md bg-transparent text-base file:border-0 file:bg-background file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
@@ -34,8 +33,8 @@ export type FloatingInputProps = InputProps & {
 };
 
 export function FloatingInput({
-  id,
   className,
+  id,
   label,
   ...props
 }: FloatingInputProps) {
@@ -47,7 +46,7 @@ export function FloatingInput({
       >
         <span className="inline-flex bg-background px-2">{label}</span>
       </label>
-      <Input id={id} className={className} placeholder="" {...props} />
+      <Input className={className} id={id} placeholder="" {...props} />
     </>
   );
 }

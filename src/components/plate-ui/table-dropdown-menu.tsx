@@ -1,12 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import { cn } from '@udecode/cn';
-import { useEditorPlugin, useEditorSelector } from '@udecode/plate/react';
 import { TablePlugin, useTableMergeState } from '@udecode/plate-table/react';
+import { useEditorPlugin, useEditorSelector } from '@udecode/plate/react';
 import {
   ArrowDown,
   ArrowLeft,
@@ -19,6 +16,7 @@ import {
   Ungroup,
   XIcon,
 } from 'lucide-react';
+import React, { useState } from 'react';
 
 import {
   DropdownMenu,
@@ -46,14 +44,14 @@ export function TableDropdownMenu(props: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Table" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Table">
           <Table />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="flex w-[180px] min-w-0 flex-col"
         align="start"
+        className="flex w-[180px] min-w-0 flex-col"
       >
         <DropdownMenuGroup>
           <DropdownMenuSub>
@@ -235,11 +233,11 @@ export function TablePicker() {
           rows.map((value, columIndex) => {
             return (
               <div
-                key={`(${rowIndex},${columIndex})`}
                 className={cn(
                   'col-span-1 size-3 border border-solid bg-secondary',
                   !!value && 'border-current'
                 )}
+                key={`(${rowIndex},${columIndex})`}
                 onMouseMove={() => {
                   onCellMove(rowIndex, columIndex);
                 }}

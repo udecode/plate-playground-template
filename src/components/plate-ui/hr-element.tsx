@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-
 import { cn, withRef } from '@udecode/cn';
 import { useFocused, useReadOnly, useSelected } from '@udecode/plate/react';
+import React from 'react';
 
 import { PlateElement } from './plate-element';
 
@@ -16,7 +15,7 @@ export const HrElement = withRef<typeof PlateElement>(
     const focused = useFocused();
 
     return (
-      <PlateElement ref={ref} className={className} {...props}>
+      <PlateElement className={className} ref={ref} {...props}>
         <div className="py-6" contentEditable={false}>
           <hr
             {...nodeProps}

@@ -1,6 +1,5 @@
-import type { FileRouter } from 'uploadthing/next';
-
 import { createRouteHandler, createUploadthing } from 'uploadthing/next';
+import { type AnyFileRoute, type FileRouter } from 'uploadthing/types';
 
 const f = createUploadthing();
 
@@ -10,11 +9,20 @@ const ourFileRouter = {
       return {};
     })
     .onUploadComplete(({ file }) => {
-      return { file };
+      return {
+        file: {
+          customId: file.customId,
+          key: file.key,
+          lastModified: file.lastModified,
+          name: file.name,
+          size: file.size,
+          type: file.type,
+        },
+      };
     }),
-} satisfies FileRouter;
+};
 
-export type OurFileRouter = typeof ourFileRouter;
+export type OurFileRouter = AnyFileRoute & FileRouter & typeof ourFileRouter;
 
 export const { GET, POST } = createRouteHandler({
   router: ourFileRouter,

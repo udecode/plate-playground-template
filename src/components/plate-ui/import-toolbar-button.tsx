@@ -1,12 +1,10 @@
 'use client';
 
-import React from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import { getEditorDOMFromHtmlString } from '@udecode/plate';
 import { useEditorRef } from '@udecode/plate/react';
 import { ArrowUpToLineIcon } from 'lucide-react';
+import React from 'react';
 import { useFilePicker } from 'use-file-picker';
 
 import {
@@ -43,7 +41,7 @@ export function ImportToolbarButton({ children, ...props }: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Import" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Import">
           <ArrowUpToLineIcon className="size-4" />
         </ToolbarButton>
       </DropdownMenuTrigger>

@@ -1,8 +1,5 @@
 'use client';
 
-import React from 'react';
-
-import { useEditorReadOnly } from '@udecode/plate/react';
 import {
   BoldPlugin,
   CodePlugin,
@@ -10,6 +7,7 @@ import {
   StrikethroughPlugin,
   UnderlinePlugin,
 } from '@udecode/plate-basic-marks/react';
+import { useEditorReadOnly } from '@udecode/plate/react';
 import {
   BoldIcon,
   Code2Icon,
@@ -18,6 +16,7 @@ import {
   UnderlineIcon,
   WandSparklesIcon,
 } from 'lucide-react';
+import React from 'react';
 
 import { AIToolbarButton } from './ai-toolbar-button';
 import { CommentToolbarButton } from './comment-toolbar-button';

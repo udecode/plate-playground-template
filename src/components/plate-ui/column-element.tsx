@@ -1,15 +1,13 @@
 'use client';
 
-import React from 'react';
-
-import type { TColumnElement } from '@udecode/plate-layout';
-
 import { cn, useComposedRef, withRef } from '@udecode/cn';
 import { PathApi } from '@udecode/plate';
-import { useReadOnly, withHOC } from '@udecode/plate/react';
 import { useDraggable, useDropLine } from '@udecode/plate-dnd';
+import type { TColumnElement } from '@udecode/plate-layout';
 import { ResizableProvider } from '@udecode/plate-resizable';
+import { useReadOnly, withHOC } from '@udecode/plate/react';
 import { GripHorizontal } from 'lucide-react';
+import React from 'react';
 
 import { Button } from './button';
 import { PlateElement } from './plate-element';
@@ -27,7 +25,7 @@ export const ColumnElement = withHOC(
     const readOnly = useReadOnly();
     const { width } = props.element as TColumnElement;
 
-    const { isDragging, previewRef, handleRef } = useDraggable({
+    const { handleRef, isDragging, previewRef } = useDraggable({
       canDropNode: ({ dragEntry, dropEntry }) =>
         PathApi.equals(
           PathApi.parent(dragEntry[1]),
@@ -41,22 +39,22 @@ export const ColumnElement = withHOC(
     return (
       <div className="group/column relative" style={{ width: width ?? '100%' }}>
         <div
-          ref={handleRef}
           className={cn(
             'absolute left-1/2 top-2 z-50 -translate-x-1/2 -translate-y-1/2',
             'pointer-events-auto flex items-center',
             'opacity-0 transition-opacity group-hover/column:opacity-100'
           )}
+          ref={handleRef}
         >
           <ColumnDragHandle />
         </div>
 
         <PlateElement
-          ref={useComposedRef(ref, previewRef)}
           className={cn(
             className,
             'h-full px-2 pt-2 group-first/column:pl-0 group-last/column:pr-0'
           )}
+          ref={useComposedRef(ref, previewRef)}
           {...props}
         >
           <div
@@ -80,7 +78,7 @@ const ColumnDragHandle = React.memo(() => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button size="none" variant="ghost" className="h-5 px-1">
+          <Button className="h-5 px-1" size="none" variant="ghost">
             <GripHorizontal
               className="size-4 text-muted-foreground"
               onClick={(event) => {
@@ -110,7 +108,6 @@ const DropLine = React.forwardRef<
     <div
       ref={ref}
       {...props}
-      // eslint-disable-next-line tailwindcss/no-custom-classname
       className={cn(
         'slate-dropLine',
         'absolute bg-brand/50',

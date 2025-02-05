@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { withCn, withProps } from '@udecode/cn';
+import React from 'react';
 
 import { Button } from './button';
 
@@ -26,12 +25,11 @@ export const TooltipContent = withCn(
   'z-50 overflow-hidden rounded-md bg-black px-3 py-1.5 text-sm font-semibold text-white shadow-md'
 );
 
-export function withTooltip<
-  T extends React.ComponentType<any> | keyof HTMLElementTagNameMap,
->(Component: T) {
+export function withTooltip<T extends React.ElementType>(Component: T) {
   return React.forwardRef<
-    React.ElementRef<T>,
+    React.ElementRef<typeof TooltipPrimitive.Content>,
     {
+      tooltip?: React.ReactNode;
       tooltipContentProps?: Omit<
         React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>,
         'children'
@@ -40,7 +38,6 @@ export function withTooltip<
         React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>,
         'children'
       >;
-      tooltip?: React.ReactNode;
     } & React.ComponentPropsWithoutRef<T> &
       Omit<TooltipPrimitive.TooltipProviderProps, 'children'>
   >(function ExtendComponent(

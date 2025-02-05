@@ -1,22 +1,21 @@
 'use client';
 
-import React from 'react';
-import LiteYouTubeEmbed from 'react-lite-youtube-embed';
-import ReactPlayer from 'react-player';
-
 import { cn, withRef } from '@udecode/cn';
-import { useEditorMounted, withHOC } from '@udecode/plate/react';
 import { useDraggable } from '@udecode/plate-dnd';
 import { parseTwitterUrl, parseVideoUrl } from '@udecode/plate-media';
 import { useMediaState } from '@udecode/plate-media/react';
 import { ResizableProvider, useResizableStore } from '@udecode/plate-resizable';
+import { useEditorMounted, withHOC } from '@udecode/plate/react';
+import React from 'react';
+import LiteYouTubeEmbed from 'react-lite-youtube-embed';
+import ReactPlayer from 'react-player';
 
 import { Caption, CaptionTextarea } from './caption';
 import { PlateElement } from './plate-element';
 import {
+  mediaResizeHandleVariants,
   Resizable,
   ResizeHandle,
-  mediaResizeHandleVariants,
 } from './resizable';
 
 export const MediaVideoElement = withHOC(
@@ -39,19 +38,19 @@ export const MediaVideoElement = withHOC(
 
       const isTweet = true;
 
-      const { isDragging, handleRef } = useDraggable({
+      const { handleRef, isDragging } = useDraggable({
         element: props.element,
       });
 
       return (
-        <PlateElement ref={ref} className={cn(className, 'py-2.5')} {...props}>
+        <PlateElement className={cn(className, 'py-2.5')} ref={ref} {...props}>
           <figure
             className="relative m-0 cursor-default"
             contentEditable={false}
           >
             <Resizable
-              className={cn(isDragging && 'opacity-50')}
               align={align}
+              className={cn(isDragging && 'opacity-50')}
               options={{
                 align,
                 maxWidth: isTweet ? 550 : '100%',
@@ -100,20 +99,20 @@ export const MediaVideoElement = withHOC(
                 {isUpload && isEditorMounted && (
                   <div ref={handleRef}>
                     <ReactPlayer
+                      controls
                       height="100%"
                       url={unsafeUrl}
                       width="100%"
-                      controls
                     />
                   </div>
                 )}
               </div>
             </Resizable>
 
-            <Caption style={{ width }} align={align}>
+            <Caption align={align} style={{ width }}>
               <CaptionTextarea
-                readOnly={readOnly}
                 placeholder="Write a caption..."
+                readOnly={readOnly}
               />
             </Caption>
           </figure>

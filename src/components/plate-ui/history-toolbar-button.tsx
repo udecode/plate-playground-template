@@ -14,10 +14,10 @@ export const RedoToolbarButton = withRef<typeof ToolbarButton>((props, ref) => {
 
   return (
     <ToolbarButton
-      ref={ref}
       disabled={disabled}
       onClick={() => editor.redo()}
       onMouseDown={(e) => e.preventDefault()}
+      ref={ref}
       tooltip="Redo"
       {...props}
     >
@@ -35,10 +35,10 @@ export const UndoToolbarButton = withRef<typeof ToolbarButton>((props, ref) => {
 
   return (
     <ToolbarButton
-      ref={ref}
       disabled={disabled}
       onClick={() => editor.undo()}
       onMouseDown={(e) => e.preventDefault()}
+      ref={ref}
       tooltip="Undo"
       {...props}
     >

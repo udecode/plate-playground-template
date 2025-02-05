@@ -1,27 +1,11 @@
 'use client';
 
-import React, {
-  type HTMLAttributes,
-  type ReactNode,
-  type RefObject,
-  createContext,
-  forwardRef,
-  startTransition,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-
-import type { PointRef, TElement } from '@udecode/plate';
-
 import {
-  type ComboboxItemProps,
   Combobox,
   ComboboxGroup,
   ComboboxGroupLabel,
   ComboboxItem,
+  type ComboboxItemProps,
   ComboboxPopover,
   ComboboxProvider,
   ComboboxRow,
@@ -30,17 +14,31 @@ import {
   useComboboxStore,
 } from '@ariakit/react';
 import { cn, withCn } from '@udecode/cn';
-import { useComposedRef, useEditorRef } from '@udecode/plate/react';
+import type { PointRef, TElement } from '@udecode/plate';
 import { filterWords } from '@udecode/plate-combobox';
 import {
-  type UseComboboxInputResult,
   useComboboxInput,
+  type UseComboboxInputResult,
   useHTMLInputCursorState,
 } from '@udecode/plate-combobox/react';
+import { useComposedRef, useEditorRef } from '@udecode/plate/react';
 import { cva } from 'class-variance-authority';
+import React, {
+  createContext,
+  forwardRef,
+  type HTMLAttributes,
+  type ReactNode,
+  type RefObject,
+  startTransition,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 type FilterFn = (
-  item: { value: string; group?: string; keywords?: string[]; label?: string },
+  item: { value: string; label?: string; group?: string; keywords?: string[] },
   search: string
 ) => boolean;
 
@@ -74,11 +72,11 @@ export const defaultFilter: FilterFn = (
 interface InlineComboboxProps {
   children: ReactNode;
   element: TElement;
-  trigger: string;
   filter?: FilterFn | false;
   hideWhenNoValue?: boolean;
   setValue?: (value: string) => void;
   showTrigger?: boolean;
+  trigger: string;
   value?: string;
 }
 
@@ -93,7 +91,7 @@ const InlineCombobox = ({
   value: valueProp,
 }: InlineComboboxProps) => {
   const editor = useEditorRef();
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null!);
   const cursorState = useHTMLInputCursorState(inputRef);
 
   const [valueState, setValueState] = useState('');
@@ -137,7 +135,6 @@ const InlineCombobox = ({
   const { props: inputProps, removeInput } = useComboboxInput({
     cancelInputOnBlur: false,
     cursorState,
-    ref: inputRef,
     onCancelInput: (cause) => {
       if (cause !== 'backspace') {
         editor.tf.insertText(trigger + value, {
@@ -151,6 +148,7 @@ const InlineCombobox = ({
         });
       }
     },
+    ref: inputRef,
   });
 
   const [hasEmpty, setHasEmpty] = useState(false);
@@ -191,7 +189,6 @@ const InlineCombobox = ({
     if (!store.getState().activeId) {
       store.setActiveId(store.first());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, store]);
 
   return (
@@ -240,20 +237,20 @@ const InlineComboboxInput = forwardRef<
 
       <span className="relative min-h-[1lh]">
         <span
-          className="invisible overflow-hidden text-nowrap"
           aria-hidden="true"
+          className="invisible overflow-hidden text-nowrap"
         >
           {value || '\u200B'}
         </span>
 
         <Combobox
-          ref={ref}
+          autoSelect
           className={cn(
             'absolute left-0 top-0 size-full bg-transparent outline-none',
             className
           )}
+          ref={ref}
           value={value}
-          autoSelect
           {...inputProps}
           {...props}
         />
@@ -298,10 +295,10 @@ const comboboxItemVariants = cva(
 );
 
 export type InlineComboboxItemProps = {
+  label?: string;
   focusEditor?: boolean;
   group?: string;
   keywords?: string[];
-  label?: string;
 } & ComboboxItemProps &
   Required<Pick<ComboboxItemProps, 'value'>>;
 

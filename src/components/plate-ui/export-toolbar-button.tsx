@@ -1,17 +1,49 @@
 'use client';
 
-import React from 'react';
-
+import { BlockquoteElementStatic } from '@/components/plate-ui/blockquote-element-static';
+import { CodeBlockElementStatic } from '@/components/plate-ui/code-block-element-static';
+import { CodeLeafStatic } from '@/components/plate-ui/code-leaf-static';
+import { CodeLineElementStatic } from '@/components/plate-ui/code-line-element-static';
+import { CodeSyntaxLeafStatic } from '@/components/plate-ui/code-syntax-leaf-static';
+import { ColumnElementStatic } from '@/components/plate-ui/column-element-static';
+import { ColumnGroupElementStatic } from '@/components/plate-ui/column-group-element-static';
+import { CommentLeafStatic } from '@/components/plate-ui/comment-leaf-static';
+import { DateElementStatic } from '@/components/plate-ui/date-element-static';
+import { HeadingElementStatic } from '@/components/plate-ui/heading-element-static';
+import { HighlightLeafStatic } from '@/components/plate-ui/highlight-leaf-static';
+import { HrElementStatic } from '@/components/plate-ui/hr-element-static';
+import { ImageElementStatic } from '@/components/plate-ui/image-element-static';
+import {
+  FireLiComponent,
+  FireMarker,
+} from '@/components/plate-ui/indent-fire-marker';
+import {
+  TodoLiStatic,
+  TodoMarkerStatic,
+} from '@/components/plate-ui/indent-todo-marker-static';
+import { KbdLeafStatic } from '@/components/plate-ui/kbd-leaf-static';
+import { LinkElementStatic } from '@/components/plate-ui/link-element-static';
+import { MediaAudioElementStatic } from '@/components/plate-ui/media-audio-element-static';
+import { MediaFileElementStatic } from '@/components/plate-ui/media-file-element-static';
+import { MediaVideoElementStatic } from '@/components/plate-ui/media-video-element-static';
+import { MentionElementStatic } from '@/components/plate-ui/mention-element-static';
+import { ParagraphElementStatic } from '@/components/plate-ui/paragraph-element-static';
+import {
+  TableCellElementStatic,
+  TableCellHeaderStaticElement,
+} from '@/components/plate-ui/table-cell-element-static';
+import { TableElementStatic } from '@/components/plate-ui/table-element-static';
+import { TableRowElementStatic } from '@/components/plate-ui/table-row-element-static';
+import { TocElementStatic } from '@/components/plate-ui/toc-element-static';
+import { ToggleElementStatic } from '@/components/plate-ui/toggle-element-static';
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import { withProps } from '@udecode/cn';
 import {
   BaseParagraphPlugin,
-  SlateLeaf,
   createSlateEditor,
   serializeHtml,
+  SlateLeaf,
 } from '@udecode/plate';
-import { useEditorRef } from '@udecode/plate/react';
 import { BaseAlignPlugin } from '@udecode/plate-alignment';
 import {
   BaseBoldPlugin,
@@ -68,45 +100,10 @@ import {
   BaseTableRowPlugin,
 } from '@udecode/plate-table';
 import { BaseTogglePlugin } from '@udecode/plate-toggle';
+import { useEditorRef } from '@udecode/plate/react';
 import { ArrowDownToLineIcon } from 'lucide-react';
 import Prism from 'prismjs';
-
-import { BlockquoteElementStatic } from '@/components/plate-ui/blockquote-element-static';
-import { CodeBlockElementStatic } from '@/components/plate-ui/code-block-element-static';
-import { CodeLeafStatic } from '@/components/plate-ui/code-leaf-static';
-import { CodeLineElementStatic } from '@/components/plate-ui/code-line-element-static';
-import { CodeSyntaxLeafStatic } from '@/components/plate-ui/code-syntax-leaf-static';
-import { ColumnElementStatic } from '@/components/plate-ui/column-element-static';
-import { ColumnGroupElementStatic } from '@/components/plate-ui/column-group-element-static';
-import { CommentLeafStatic } from '@/components/plate-ui/comment-leaf-static';
-import { DateElementStatic } from '@/components/plate-ui/date-element-static';
-import { HeadingElementStatic } from '@/components/plate-ui/heading-element-static';
-import { HighlightLeafStatic } from '@/components/plate-ui/highlight-leaf-static';
-import { HrElementStatic } from '@/components/plate-ui/hr-element-static';
-import { ImageElementStatic } from '@/components/plate-ui/image-element-static';
-import {
-  FireLiComponent,
-  FireMarker,
-} from '@/components/plate-ui/indent-fire-marker';
-import {
-  TodoLiStatic,
-  TodoMarkerStatic,
-} from '@/components/plate-ui/indent-todo-marker-static';
-import { KbdLeafStatic } from '@/components/plate-ui/kbd-leaf-static';
-import { LinkElementStatic } from '@/components/plate-ui/link-element-static';
-import { MediaAudioElementStatic } from '@/components/plate-ui/media-audio-element-static';
-import { MediaFileElementStatic } from '@/components/plate-ui/media-file-element-static';
-import { MediaVideoElementStatic } from '@/components/plate-ui/media-video-element-static';
-import { MentionElementStatic } from '@/components/plate-ui/mention-element-static';
-import { ParagraphElementStatic } from '@/components/plate-ui/paragraph-element-static';
-import {
-  TableCellElementStatic,
-  TableCellHeaderStaticElement,
-} from '@/components/plate-ui/table-cell-element-static';
-import { TableElementStatic } from '@/components/plate-ui/table-element-static';
-import { TableRowElementStatic } from '@/components/plate-ui/table-row-element-static';
-import { TocElementStatic } from '@/components/plate-ui/toc-element-static';
-import { ToggleElementStatic } from '@/components/plate-ui/toggle-element-static';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -147,8 +144,8 @@ export function ExportToolbarButton({ children, ...props }: DropdownMenuProps) {
     filename,
     isHtml = false,
   }: {
-    content: string;
     filename: string;
+    content: string;
     isHtml?: boolean;
   }) => {
     const element = document.createElement('a');
@@ -367,7 +364,7 @@ export function ExportToolbarButton({ children, ...props }: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Export" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Export">
           <ArrowDownToLineIcon className="size-4" />
         </ToolbarButton>
       </DropdownMenuTrigger>

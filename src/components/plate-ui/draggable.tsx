@@ -1,20 +1,8 @@
 'use client';
 
-import React, { useMemo } from 'react';
-
-import { cn, withRef } from '@udecode/cn';
+import { STRUCTURAL_TYPES } from '@/components/editor/transforms';
+import { cn } from '@udecode/cn';
 import { isType } from '@udecode/plate';
-import {
-  type NodeWrapperComponent,
-  type PlateRenderElementProps,
-  MemoizedChildren,
-  ParagraphPlugin,
-  useEditorPlugin,
-  useEditorRef,
-  useElement,
-  usePath,
-} from '@udecode/plate/react';
-import { useReadOnly, useSelected } from '@udecode/plate/react';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
 import { useDraggable, useDropLine } from '@udecode/plate-dnd';
@@ -33,9 +21,19 @@ import {
   TableRowPlugin,
 } from '@udecode/plate-table/react';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
+import {
+  MemoizedChildren,
+  ParagraphPlugin,
+  type PlateRenderElementProps,
+  RenderNodeWrapper,
+  useEditorPlugin,
+  useEditorRef,
+  useElement,
+  usePath,
+} from '@udecode/plate/react';
+import { useReadOnly, useSelected } from '@udecode/plate/react';
 import { GripVertical } from 'lucide-react';
-
-import { STRUCTURAL_TYPES } from '@/components/editor/transforms';
+import React, { useMemo } from 'react';
 
 import {
   Tooltip,
@@ -51,8 +49,11 @@ const UNDRAGGABLE_KEYS = [
   TableCellPlugin.key,
 ];
 
-export const DraggableAboveNodes: NodeWrapperComponent = (props) => {
-  const { editor, element, path } = props;
+export const DraggableAboveNodes: RenderNodeWrapper = ({
+  editor,
+  element,
+  path,
+}) => {
   const readOnly = useReadOnly();
 
   const enabled = useMemo(() => {
@@ -90,65 +91,67 @@ export const DraggableAboveNodes: NodeWrapperComponent = (props) => {
 
   if (!enabled) return;
 
+  // Return a function that receives props and returns JSX
   return (props) => <Draggable {...props} />;
 };
 
-export const Draggable = withRef<'div', PlateRenderElementProps>(
-  ({ className, ...props }, ref) => {
-    const { children, editor, element, path } = props;
-    const { isDragging, previewRef, handleRef } = useDraggable({ element });
+export const Draggable = React.forwardRef<
+  HTMLDivElement,
+  PlateRenderElementProps
+>(({ className, ...props }, ref) => {
+  const { children, editor, element, path } = props;
+  const { handleRef, isDragging, previewRef } = useDraggable({ element });
 
-    const isInColumn = path.length === 3;
-    const isInTable = path.length === 4;
+  const isInColumn = path.length === 3;
+  const isInTable = path.length === 4;
 
-    return (
-      <div
-        ref={ref}
-        className={cn(
-          'relative',
-          isDragging && 'opacity-50',
-          STRUCTURAL_TYPES.includes(element.type) ? 'group/structural' : 'group'
-        )}
-      >
-        <Gutter>
+  return (
+    <div
+      className={cn(
+        'relative',
+        isDragging && 'opacity-50',
+        STRUCTURAL_TYPES.includes(element.type) ? 'group/structural' : 'group'
+      )}
+      ref={ref}
+    >
+      <Gutter>
+        <div
+          className={cn(
+            'slate-blockToolbarWrapper',
+            'flex h-[1.5em]',
+            isType(editor, element, [
+              HEADING_KEYS.h1,
+              HEADING_KEYS.h2,
+              HEADING_KEYS.h3,
+              HEADING_KEYS.h4,
+              HEADING_KEYS.h5,
+            ]) && 'h-[1.3em]',
+            isInColumn && 'h-4',
+            isInTable && 'mt-1 size-4'
+          )}
+        >
           <div
             className={cn(
-              'slate-blockToolbarWrapper',
-              'flex h-[1.5em]',
-              isType(editor, element, [
-                HEADING_KEYS.h1,
-                HEADING_KEYS.h2,
-                HEADING_KEYS.h3,
-                HEADING_KEYS.h4,
-                HEADING_KEYS.h5,
-              ]) && 'h-[1.3em]',
-              isInColumn && 'h-4',
-              isInTable && 'mt-1 size-4'
+              'slate-blockToolbar',
+              'pointer-events-auto mr-1 flex items-center',
+              isInColumn && 'mr-1.5'
             )}
           >
-            <div
-              className={cn(
-                'slate-blockToolbar',
-                'pointer-events-auto mr-1 flex items-center',
-                isInColumn && 'mr-1.5'
-              )}
-            >
-              <div ref={handleRef} className="size-4">
-                <DragHandle />
-              </div>
+            <div className="size-4" ref={handleRef}>
+              <DragHandle />
             </div>
           </div>
-        </Gutter>
-
-        <div ref={previewRef} className="slate-blockWrapper">
-          <MemoizedChildren>{children}</MemoizedChildren>
-
-          <DropLine />
         </div>
+      </Gutter>
+
+      <div className="slate-blockWrapper" ref={previewRef}>
+        <MemoizedChildren>{children}</MemoizedChildren>
+
+        <DropLine />
       </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 const Gutter = React.forwardRef<
   HTMLDivElement,
@@ -167,7 +170,6 @@ const Gutter = React.forwardRef<
 
   return (
     <div
-      ref={ref}
       className={cn(
         'slate-gutterLeft',
         'absolute -top-px z-50 flex h-full -translate-x-full cursor-text hover:opacity-100 sm:opacity-0',
@@ -199,6 +201,7 @@ const Gutter = React.forwardRef<
         className
       )}
       contentEditable={false}
+      ref={ref}
       {...props}
     >
       {children}

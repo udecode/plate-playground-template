@@ -1,7 +1,8 @@
 'use client';
 
+import { FixedToolbarPlugin } from '@/components/editor/plugins/fixed-toolbar-plugin';
+import { FloatingToolbarPlugin } from '@/components/editor/plugins/floating-toolbar-plugin';
 import emojiMartData from '@emoji-mart/data';
-import { ParagraphPlugin } from '@udecode/plate/react';
 import { CalloutPlugin } from '@udecode/plate-callout/react';
 import { DatePlugin } from '@udecode/plate-date/react';
 import { DocxPlugin } from '@udecode/plate-docx';
@@ -20,9 +21,7 @@ import { MarkdownPlugin } from '@udecode/plate-markdown';
 import { SlashPlugin } from '@udecode/plate-slash-command/react';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
 import { TrailingBlockPlugin } from '@udecode/plate-trailing-block';
-
-import { FixedToolbarPlugin } from '@/components/editor/plugins/fixed-toolbar-plugin';
-import { FloatingToolbarPlugin } from '@/components/editor/plugins/floating-toolbar-plugin';
+import { ParagraphPlugin } from '@udecode/plate/react';
 
 import { aiPlugins } from './ai-plugins';
 import { alignPlugin } from './align-plugin';

@@ -1,20 +1,19 @@
 'use client';
 
-import React from 'react';
-
 import { cn, withRef } from '@udecode/cn';
-import { withHOC } from '@udecode/plate/react';
 import { useDraggable } from '@udecode/plate-dnd';
 import { Image, ImagePlugin, useMediaState } from '@udecode/plate-media/react';
 import { ResizableProvider, useResizableStore } from '@udecode/plate-resizable';
+import { withHOC } from '@udecode/plate/react';
+import React from 'react';
 
 import { Caption, CaptionTextarea } from './caption';
 import { MediaPopover } from './media-popover';
 import { PlateElement } from './plate-element';
 import {
+  mediaResizeHandleVariants,
   Resizable,
   ResizeHandle,
-  mediaResizeHandleVariants,
 } from './resizable';
 
 export const ImageElement = withHOC(
@@ -25,15 +24,15 @@ export const ImageElement = withHOC(
 
       const width = useResizableStore().get.width();
 
-      const { isDragging, handleRef } = useDraggable({
+      const { handleRef, isDragging } = useDraggable({
         element: props.element,
       });
 
       return (
         <MediaPopover plugin={ImagePlugin}>
           <PlateElement
-            ref={ref}
             className={cn(className, 'py-2.5')}
+            ref={ref}
             {...props}
           >
             <figure className="group relative m-0" contentEditable={false}>
@@ -49,14 +48,14 @@ export const ImageElement = withHOC(
                   options={{ direction: 'left' }}
                 />
                 <Image
-                  ref={handleRef}
+                  alt=""
                   className={cn(
                     'block w-full max-w-full cursor-pointer object-cover px-0',
                     'rounded-sm',
                     focused && selected && 'ring-2 ring-ring ring-offset-2',
                     isDragging && 'opacity-50'
                   )}
-                  alt=""
+                  ref={handleRef}
                   {...nodeProps}
                 />
                 <ResizeHandle
@@ -67,13 +66,13 @@ export const ImageElement = withHOC(
                 />
               </Resizable>
 
-              <Caption style={{ width }} align={align}>
+              <Caption align={align} style={{ width }}>
                 <CaptionTextarea
-                  readOnly={readOnly}
                   onFocus={(e) => {
                     e.preventDefault();
                   }}
                   placeholder="Write a caption..."
+                  readOnly={readOnly}
                 />
               </Caption>
             </figure>

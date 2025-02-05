@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
-
+import {
+  insertBlock,
+  insertInlineElement,
+} from '@/components/editor/transforms';
 import { withRef } from '@udecode/cn';
-import { type PlateEditor, ParagraphPlugin } from '@udecode/plate/react';
 import { AIChatPlugin } from '@udecode/plate-ai/react';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
@@ -17,6 +18,7 @@ import {
 } from '@udecode/plate-math/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
+import { ParagraphPlugin, type PlateEditor } from '@udecode/plate/react';
 import {
   CalendarIcon,
   ChevronRightIcon,
@@ -35,11 +37,7 @@ import {
   Table,
   TableOfContentsIcon,
 } from 'lucide-react';
-
-import {
-  insertBlock,
-  insertInlineElement,
-} from '@/components/editor/transforms';
+import React from 'react';
 
 import {
   InlineCombobox,
@@ -53,20 +51,20 @@ import {
 import { PlateElement } from './plate-element';
 
 type Group = {
-  group: string;
   items: Item[];
+  group: string;
 };
 
 interface Item {
-  icon: React.ReactNode;
-
-  onSelect: (editor: PlateEditor, value: string) => void;
-
-  value: string;
   className?: string;
+
   focusEditor?: boolean;
+
+  icon: React.ReactNode;
   keywords?: string[];
   label?: string;
+  onSelect: (editor: PlateEditor, value: string) => void;
+  value: string;
 }
 
 const groups: Group[] = [
@@ -76,10 +74,10 @@ const groups: Group[] = [
       {
         focusEditor: false,
         icon: <SparklesIcon />,
-        value: 'AI',
         onSelect: (editor) => {
           editor.getApi(AIChatPlugin).aiChat.show();
         },
+        value: 'AI',
       },
     ],
   },
@@ -216,10 +214,10 @@ export const SlashInputElement = withRef<typeof PlateElement>(
 
     return (
       <PlateElement
-        ref={ref}
         as="span"
         className={className}
         data-slate-value={element.value}
+        ref={ref}
         {...props}
       >
         <InlineCombobox element={element} trigger="/">
@@ -233,15 +231,15 @@ export const SlashInputElement = withRef<typeof PlateElement>(
                 <InlineComboboxGroupLabel>{group}</InlineComboboxGroupLabel>
 
                 {items.map(
-                  ({ focusEditor, icon, keywords, label, value, onSelect }) => (
+                  ({ focusEditor, icon, keywords, label, onSelect, value }) => (
                     <InlineComboboxItem
-                      key={value}
-                      value={value}
-                      onClick={() => onSelect(editor, value)}
-                      label={label}
                       focusEditor={focusEditor}
                       group={group}
+                      key={value}
                       keywords={keywords}
+                      label={label}
+                      onClick={() => onSelect(editor, value)}
+                      value={value}
                     >
                       <div className="mr-2 text-muted-foreground">{icon}</div>
                       {label ?? value}

@@ -1,21 +1,19 @@
 'use client';
 
-import React from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
-import { useEditorRef } from '@udecode/plate/react';
 import {
   SubscriptPlugin,
   SuperscriptPlugin,
 } from '@udecode/plate-basic-marks/react';
 import { KbdPlugin } from '@udecode/plate-kbd/react';
+import { useEditorRef } from '@udecode/plate/react';
 import {
   KeyboardIcon,
   MoreHorizontalIcon,
   SubscriptIcon,
   SuperscriptIcon,
 } from 'lucide-react';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -40,8 +38,8 @@ export function MoreDropdownMenu(props: DropdownMenuProps) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="ignore-click-outside/toolbar flex max-h-[500px] min-w-[180px] flex-col overflow-y-auto"
         align="start"
+        className="ignore-click-outside/toolbar flex max-h-[500px] min-w-[180px] flex-col overflow-y-auto"
       >
         <DropdownMenuGroup>
           <DropdownMenuItem

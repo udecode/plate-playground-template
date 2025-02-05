@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
-
-import { useEditorRef } from '@udecode/plate/react';
 import { PlaceholderPlugin, UploadErrorCode } from '@udecode/plate-media/react';
+import { useEditorRef } from '@udecode/plate/react';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 
 export const useUploadErrorToast = () => {

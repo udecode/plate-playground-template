@@ -1,17 +1,15 @@
 'use client';
 
-import React from 'react';
-
-import type { PlateContentProps } from '@udecode/plate/react';
-import type { VariantProps } from 'class-variance-authority';
-
 import { cn } from '@udecode/cn';
+import type { PlateContentProps } from '@udecode/plate/react';
 import {
   PlateContent,
   useEditorContainerRef,
   useEditorRef,
 } from '@udecode/plate/react';
+import type { VariantProps } from 'class-variance-authority';
 import { cva } from 'class-variance-authority';
+import React from 'react';
 
 const editorContainerVariants = cva(
   'relative w-full cursor-text select-text overflow-y-auto caret-primary selection:bg-brand/25 focus-visible:outline-none [&_.slate-selection-area]:border [&_.slate-selection-area]:border-brand/25 [&_.slate-selection-area]:bg-brand/15',
@@ -43,13 +41,13 @@ export const EditorContainer = ({
 
   return (
     <div
-      id={editor.uid}
-      ref={containerRef}
       className={cn(
         'ignore-click-outside/toolbar',
         editorContainerVariants({ variant }),
         className
       )}
+      id={editor.uid}
+      ref={containerRef}
       {...props}
     />
   );
@@ -98,7 +96,6 @@ export const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   ({ className, disabled, focused, variant, ...props }, ref) => {
     return (
       <PlateContent
-        ref={ref}
         className={cn(
           editorVariants({
             disabled,
@@ -109,6 +106,7 @@ export const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
         )}
         disabled={disabled}
         disableDefaultStyles
+        ref={ref}
         {...props}
       />
     );

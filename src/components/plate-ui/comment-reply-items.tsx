@@ -1,11 +1,10 @@
 'use client';
 
-import React from 'react';
-
 import {
   SCOPE_ACTIVE_COMMENT,
   useCommentReplies,
 } from '@udecode/plate-comments/react';
+import React from 'react';
 
 import { CommentItem } from './comment-item';
 
@@ -15,7 +14,7 @@ export function CommentReplyItems() {
   return (
     <>
       {Object.keys(commentReplies).map((id) => (
-        <CommentItem key={id} commentId={id} />
+        <CommentItem commentId={id} key={id} />
       ))}
     </>
   );

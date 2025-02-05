@@ -32,18 +32,18 @@ export const TocElement = withRef<typeof PlateElement>(
     const { headingList } = state;
 
     return (
-      <PlateElement ref={ref} className={cn(className, 'mb-1 p-0')} {...props}>
+      <PlateElement className={cn(className, 'mb-1 p-0')} ref={ref} {...props}>
         <div contentEditable={false}>
           {headingList.length > 0 ? (
             headingList.map((item) => (
               <Button
-                key={item.id}
-                variant="ghost"
+                aria-current
                 className={cn(
                   headingItemVariants({ depth: item.depth as any })
                 )}
+                key={item.id}
                 onClick={(e) => btnProps.onClick(e, item, 'smooth')}
-                aria-current
+                variant="ghost"
               >
                 {item.title}
               </Button>

@@ -13,6 +13,26 @@ export type NoEmojiPreviewProps = Pick<UseEmojiPickerType, 'i18n'>;
 
 export type PickAnEmojiPreviewProps = NoEmojiPreviewProps;
 
+export function EmojiPickerPreview({
+  emoji,
+  hasFound = true,
+  i18n,
+  isSearching = false,
+  ...props
+}: EmojiPickerPreviewProps) {
+  const showPickEmoji = !emoji && (!isSearching || hasFound);
+  const showNoEmoji = isSearching && !hasFound;
+  const showPreview = emoji && !showNoEmoji && !showNoEmoji;
+
+  return (
+    <>
+      {showPreview && <EmojiPreview emoji={emoji} {...props} />}
+      {showPickEmoji && <PickAnEmoji i18n={i18n} {...props} />}
+      {showNoEmoji && <NoEmoji i18n={i18n} {...props} />}
+    </>
+  );
+}
+
 function EmojiPreview({ emoji }: EmojiPreviewProps) {
   return (
     <div className="flex h-14 max-h-14 min-h-14 items-center border-t border-muted p-2">
@@ -49,25 +69,5 @@ function PickAnEmoji({ i18n }: PickAnEmojiPreviewProps) {
         <div className="truncate text-sm font-semibold">{i18n.pick}</div>
       </div>
     </div>
-  );
-}
-
-export function EmojiPickerPreview({
-  emoji,
-  hasFound = true,
-  i18n,
-  isSearching = false,
-  ...props
-}: EmojiPickerPreviewProps) {
-  const showPickEmoji = !emoji && (!isSearching || hasFound);
-  const showNoEmoji = isSearching && !hasFound;
-  const showPreview = emoji && !showNoEmoji && !showNoEmoji;
-
-  return (
-    <>
-      {showPreview && <EmojiPreview emoji={emoji} {...props} />}
-      {showPickEmoji && <PickAnEmoji i18n={i18n} {...props} />}
-      {showNoEmoji && <NoEmoji i18n={i18n} {...props} />}
-    </>
   );
 }

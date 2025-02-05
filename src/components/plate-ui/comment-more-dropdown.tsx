@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import { cn } from '@udecode/cn';
 import {
   useCommentDeleteButton,
@@ -10,6 +8,7 @@ import {
   useCommentEditButtonState,
 } from '@udecode/plate-comments/react';
 import { MoreHorizontal } from 'lucide-react';
+import React from 'react';
 
 import { Button } from './button';
 import {
@@ -29,7 +28,7 @@ export function CommentMoreDropdown() {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className={cn('h-6 p-1 text-muted-foreground')}>
+        <Button className={cn('h-6 p-1 text-muted-foreground')} variant="ghost">
           <MoreHorizontal className="size-4" />
         </Button>
       </DropdownMenuTrigger>

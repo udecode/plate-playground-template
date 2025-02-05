@@ -59,16 +59,17 @@ export const DateElement = withRef<typeof PlateElement>(
 
     return (
       <PlateElement
-        ref={ref}
         className={cn(className, 'inline-block')}
         contentEditable={false}
+        ref={ref}
         {...props}
       >
         <Popover>
           <PopoverTrigger asChild>{trigger}</PopoverTrigger>
           <PopoverContent className="w-auto p-0">
             <Calendar
-              selected={new Date(element.date as string)}
+              initialFocus
+              mode="single"
               onSelect={(date) => {
                 if (!date) return;
 
@@ -77,8 +78,7 @@ export const DateElement = withRef<typeof PlateElement>(
                   { at: element }
                 );
               }}
-              mode="single"
-              initialFocus
+              selected={new Date(element.date as string)}
             />
           </PopoverContent>
         </Popover>

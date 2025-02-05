@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "strict": false,
+    "strict": true,
     "strictNullChecks": true,
     "allowUnusedLabels": false,
     "allowUnreachableCode": false,
@@ -28,7 +28,7 @@
     "target": "es2022",
     "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "allowImportingTsExtensions": false,
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "noEmit": true,
     "incremental": true,
@@ -53,6 +53,9 @@
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
+    "eslint.config.js",
+    "prettier.config.js",
+    "tailwind.config.js",
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.cts",

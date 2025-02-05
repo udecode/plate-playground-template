@@ -1,7 +1,6 @@
 'use client';
 
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import {
   useColorDropdownMenu,
   useColorDropdownMenuState,
@@ -45,8 +44,8 @@ export function ColorDropdownMenu({
 
       <DropdownMenuContent align="start">
         <ColorPicker
-          color={state.selectedColor || state.color}
           clearColor={state.clearColor}
+          color={state.selectedColor || state.color}
           colors={state.colors}
           customColors={state.customColors}
           updateColor={state.updateColorAndClose}

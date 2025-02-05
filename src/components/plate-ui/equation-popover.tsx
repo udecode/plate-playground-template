@@ -1,13 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import TextareaAutosize, {
-  type TextareaAutosizeProps,
-} from 'react-textarea-autosize';
-
-import type { TEquationElement } from '@udecode/plate-math';
-
 import { cn } from '@udecode/cn';
+import type { TEquationElement } from '@udecode/plate-math';
+import { useEquationInput } from '@udecode/plate-math/react';
+import { BlockSelectionPlugin } from '@udecode/plate-selection/react';
 import {
   createPrimitiveComponent,
   useEditorRef,
@@ -15,9 +11,11 @@ import {
   useReadOnly,
   useSelected,
 } from '@udecode/plate/react';
-import { useEquationInput } from '@udecode/plate-math/react';
-import { BlockSelectionPlugin } from '@udecode/plate-selection/react';
 import { CornerDownLeftIcon } from 'lucide-react';
+import React, { useEffect } from 'react';
+import TextareaAutosize, {
+  type TextareaAutosizeProps,
+} from 'react-textarea-autosize';
 
 import { Button } from './button';
 import { PopoverContent } from './popover';
@@ -34,8 +32,8 @@ const EquationPopoverContent = ({
   ...props
 }: {
   isInline: boolean;
-  open: boolean;
   setOpen: (open: boolean) => void;
+  open: boolean;
 } & TextareaAutosizeProps) => {
   const editor = useEditorRef();
   const readOnly = useReadOnly();
@@ -65,19 +63,19 @@ const EquationPopoverContent = ({
   return (
     <PopoverContent
       className="flex gap-2"
+      contentEditable={false}
       onEscapeKeyDown={(e) => {
         e.preventDefault();
       }}
-      contentEditable={false}
     >
       <EquationInput
-        className={cn('max-h-[50vh] grow resize-none p-2 text-sm', className)}
-        state={{ isInline, open, onClose }}
         autoFocus
+        className={cn('max-h-[50vh] grow resize-none p-2 text-sm', className)}
+        state={{ isInline, onClose, open }}
         {...props}
       />
 
-      <Button variant="secondary" className="px-3" onClick={onClose}>
+      <Button className="px-3" onClick={onClose} variant="secondary">
         Done <CornerDownLeftIcon className="size-3.5" />
       </Button>
     </PopoverContent>

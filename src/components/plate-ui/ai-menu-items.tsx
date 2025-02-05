@@ -1,11 +1,9 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
-
-import { type SlateEditor, NodeApi } from '@udecode/plate';
-import { type PlateEditor, useEditorPlugin } from '@udecode/plate/react';
+import { NodeApi, type SlateEditor } from '@udecode/plate';
 import { AIChatPlugin, AIPlugin } from '@udecode/plate-ai/react';
 import { useIsSelecting } from '@udecode/plate-selection/react';
+import { type PlateEditor, useEditorPlugin } from '@udecode/plate/react';
 import {
   Album,
   BadgeHelp,
@@ -20,6 +18,7 @@ import {
   Wand,
   X,
 } from 'lucide-react';
+import { useEffect, useMemo } from 'react';
 
 import { CommandGroup, CommandItem } from './command';
 
@@ -33,16 +32,15 @@ export const aiChatItems = {
   accept: {
     icon: <Check />,
     label: 'Accept',
-    value: 'accept',
     onSelect: ({ editor }) => {
       editor.getTransforms(AIChatPlugin).aiChat.accept();
       editor.tf.focus({ edge: 'end' });
     },
+    value: 'accept',
   },
   continueWrite: {
     icon: <PenLine />,
     label: 'Continue writing',
-    value: 'continueWrite',
     onSelect: ({ editor }) => {
       const ancestorNode = editor.api.block({ highest: true });
 
@@ -60,31 +58,31 @@ Start writing a new paragraph AFTER <Document> ONLY ONE SENTENCE`
           : 'Continue writing AFTER <Block> ONLY ONE SENTENCE. DONT REPEAT THE TEXT.',
       });
     },
+    value: 'continueWrite',
   },
   discard: {
     icon: <X />,
     label: 'Discard',
-    shortcut: 'Escape',
-    value: 'discard',
     onSelect: ({ editor }) => {
       editor.getTransforms(AIPlugin).ai.undo();
       editor.getApi(AIChatPlugin).aiChat.hide();
     },
+    shortcut: 'Escape',
+    value: 'discard',
   },
   emojify: {
     icon: <SmileIcon />,
     label: 'Emojify',
-    value: 'emojify',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Emojify',
       });
     },
+    value: 'emojify',
   },
   explain: {
     icon: <BadgeHelp />,
     label: 'Explain',
-    value: 'explain',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: {
@@ -93,77 +91,77 @@ Start writing a new paragraph AFTER <Document> ONLY ONE SENTENCE`
         },
       });
     },
+    value: 'explain',
   },
   fixSpelling: {
     icon: <Check />,
     label: 'Fix spelling & grammar',
-    value: 'fixSpelling',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Fix spelling and grammar',
       });
     },
+    value: 'fixSpelling',
   },
   improveWriting: {
     icon: <Wand />,
     label: 'Improve writing',
-    value: 'improveWriting',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Improve the writing',
       });
     },
+    value: 'improveWriting',
   },
   insertBelow: {
     icon: <ListEnd />,
     label: 'Insert below',
-    value: 'insertBelow',
     onSelect: ({ aiEditor, editor }) => {
       void editor.getTransforms(AIChatPlugin).aiChat.insertBelow(aiEditor);
     },
+    value: 'insertBelow',
   },
   makeLonger: {
     icon: <ListPlus />,
     label: 'Make longer',
-    value: 'makeLonger',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Make longer',
       });
     },
+    value: 'makeLonger',
   },
   makeShorter: {
     icon: <ListMinus />,
     label: 'Make shorter',
-    value: 'makeShorter',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Make shorter',
       });
     },
+    value: 'makeShorter',
   },
   replace: {
     icon: <Check />,
     label: 'Replace selection',
-    value: 'replace',
     onSelect: ({ aiEditor, editor }) => {
       void editor.getTransforms(AIChatPlugin).aiChat.replaceSelection(aiEditor);
     },
+    value: 'replace',
   },
   simplifyLanguage: {
     icon: <FeatherIcon />,
     label: 'Simplify language',
-    value: 'simplifyLanguage',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         prompt: 'Simplify the language',
       });
     },
+    value: 'simplifyLanguage',
   },
   summarize: {
     icon: <Album />,
     label: 'Add a summary',
-    value: 'summarize',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.submit({
         mode: 'insert',
@@ -173,25 +171,25 @@ Start writing a new paragraph AFTER <Document> ONLY ONE SENTENCE`
         },
       });
     },
+    value: 'summarize',
   },
   tryAgain: {
     icon: <CornerUpLeft />,
     label: 'Try again',
-    value: 'tryAgain',
     onSelect: ({ editor }) => {
       void editor.getApi(AIChatPlugin).aiChat.reload();
     },
+    value: 'tryAgain',
   },
 } satisfies Record<
   string,
   {
-    icon: React.ReactNode;
     label: string;
     value: string;
-    component?: React.ComponentType<{ menuState: EditorChatState }>;
+    icon: React.ReactNode;
     filterItems?: boolean;
     items?: { label: string; value: string }[];
-    shortcut?: string;
+    component?: React.ComponentType<{ menuState: EditorChatState }>;
     onSelect?: ({
       aiEditor,
       editor,
@@ -199,6 +197,7 @@ Start writing a new paragraph AFTER <Document> ONLY ONE SENTENCE`
       aiEditor: SlateEditor;
       editor: PlateEditor;
     }) => void;
+    shortcut?: string;
   }
 >;
 
@@ -280,18 +279,18 @@ export const AIMenuItems = ({
   return (
     <>
       {menuGroups.map((group, index) => (
-        <CommandGroup key={index} heading={group.heading}>
+        <CommandGroup heading={group.heading} key={index}>
           {group.items.map((menuItem) => (
             <CommandItem
-              key={menuItem.value}
               className="[&_svg]:text-muted-foreground"
-              value={menuItem.value}
+              key={menuItem.value}
               onSelect={() => {
                 menuItem.onSelect?.({
                   aiEditor,
                   editor: editor,
                 });
               }}
+              value={menuItem.value}
             >
               {menuItem.icon}
               <span>{menuItem.label}</span>

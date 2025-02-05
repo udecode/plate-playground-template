@@ -1,8 +1,7 @@
-import React from 'react';
-
 import { cn } from '@udecode/cn';
-import { type VariantProps, cva } from 'class-variance-authority';
-import { type LucideProps, Loader2Icon } from 'lucide-react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { Loader2Icon, type LucideProps } from 'lucide-react';
+import React from 'react';
 
 const spinnerVariants = cva('animate-spin text-muted-foreground', {
   defaultVariants: {

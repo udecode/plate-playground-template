@@ -1,11 +1,9 @@
 'use client';
 
-import React from 'react';
-
-import type { UseEmojiPickerType } from '@udecode/plate-emoji/react';
-
 import { cn } from '@udecode/cn';
 import { EmojiSettings } from '@udecode/plate-emoji';
+import type { UseEmojiPickerType } from '@udecode/plate-emoji/react';
+import React from 'react';
 
 import { EmojiPickerContent } from './emoji-picker-content';
 import { EmojiPickerNavigation } from './emoji-picker-navigation';
@@ -18,19 +16,19 @@ export function EmojiPicker({
   emoji,
   emojiLibrary,
   focusedCategory,
+  handleCategoryClick,
   hasFound,
   i18n,
   icons,
   isSearching,
+  onMouseOver,
+  onSelectEmoji,
   refs,
   searchResult,
   searchValue,
   setSearch,
   settings = EmojiSettings,
   visibleCategories,
-  handleCategoryClick,
-  onMouseOver,
-  onSelectEmoji,
 }: UseEmojiPickerType) {
   return (
     <div
@@ -40,11 +38,11 @@ export function EmojiPicker({
       )}
     >
       <EmojiPickerNavigation
-        onClick={handleCategoryClick}
         emojiLibrary={emojiLibrary}
         focusedCategory={focusedCategory}
         i18n={i18n}
         icons={icons}
+        onClick={handleCategoryClick}
       />
       <EmojiPickerSearchBar
         i18n={i18n}
@@ -58,11 +56,11 @@ export function EmojiPicker({
         />
       </EmojiPickerSearchBar>
       <EmojiPickerContent
-        onMouseOver={onMouseOver}
-        onSelectEmoji={onSelectEmoji}
         emojiLibrary={emojiLibrary}
         i18n={i18n}
         isSearching={isSearching}
+        onMouseOver={onMouseOver}
+        onSelectEmoji={onSelectEmoji}
         refs={refs}
         searchResult={searchResult}
         settings={settings}

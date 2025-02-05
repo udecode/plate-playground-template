@@ -1,23 +1,21 @@
 'use client';
 
-import React from 'react';
-
-import type { TTableCellElement } from '@udecode/plate-table';
-
 import { cn, withProps, withRef } from '@udecode/cn';
-import {
-  useEditorPlugin,
-  useElementSelector,
-  useReadOnly,
-} from '@udecode/plate/react';
 import { useBlockSelected } from '@udecode/plate-selection/react';
+import type { TTableCellElement } from '@udecode/plate-table';
 import {
   TablePlugin,
   TableRowPlugin,
   useTableCellElement,
   useTableCellElementResizable,
 } from '@udecode/plate-table/react';
+import {
+  useEditorPlugin,
+  useElementSelector,
+  useReadOnly,
+} from '@udecode/plate/react';
 import { cva } from 'class-variance-authority';
+import React from 'react';
 
 import { blockSelectionVariants } from './block-selection';
 import { PlateElement } from './plate-element';
@@ -58,7 +56,6 @@ export const TableCellElement = withRef<
 
   return (
     <PlateElement
-      ref={ref}
       as={isHeader ? 'th' : 'td'}
       className={cn(
         className,
@@ -79,6 +76,7 @@ export const TableCellElement = withRef<
             )
         )
       )}
+      ref={ref}
       style={
         {
           '--cellBackground': element.background,

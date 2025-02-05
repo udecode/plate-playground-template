@@ -1,19 +1,21 @@
 'use client';
 
-import React from 'react';
-
-import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import {
-  ParagraphPlugin,
-  useEditorRef,
-  useSelectionFragmentProp,
-} from '@udecode/plate/react';
+  getBlockType,
+  setBlockType,
+  STRUCTURAL_TYPES,
+} from '@/components/editor/transforms';
+import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
 import { HEADING_KEYS } from '@udecode/plate-heading';
 import { INDENT_LIST_KEYS, ListStyleType } from '@udecode/plate-indent-list';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
+import {
+  ParagraphPlugin,
+  useEditorRef,
+  useSelectionFragmentProp,
+} from '@udecode/plate/react';
 import {
   ChevronRightIcon,
   Columns3Icon,
@@ -27,12 +29,7 @@ import {
   QuoteIcon,
   SquareIcon,
 } from 'lucide-react';
-
-import {
-  STRUCTURAL_TYPES,
-  getBlockType,
-  setBlockType,
-} from '@/components/editor/transforms';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -132,30 +129,30 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Turn into" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Turn into">
           {selectedItem.label}
         </ToolbarButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
+        align="start"
         className="ignore-click-outside/toolbar min-w-0"
         onCloseAutoFocus={(e) => {
           e.preventDefault();
           editor.tf.focus();
         }}
-        align="start"
       >
         <DropdownMenuRadioGroup
-          value={value}
+          label="Turn into"
           onValueChange={(type) => {
             setBlockType(editor, type);
           }}
-          label="Turn into"
+          value={value}
         >
           {turnIntoItems.map(({ icon, label, value: itemValue }) => (
             <DropdownMenuRadioItem
-              key={itemValue}
               className="min-w-[180px]"
+              key={itemValue}
               value={itemValue}
             >
               {icon}

@@ -1,20 +1,5 @@
 'use client';
 
-import { type ReactNode, createContext, useContext, useState } from 'react';
-
-import { cn } from '@udecode/cn';
-import { useEditorPlugin } from '@udecode/plate/react';
-import { CopilotPlugin } from '@udecode/plate-ai/react';
-import {
-  Check,
-  ChevronsUpDown,
-  ExternalLinkIcon,
-  Eye,
-  EyeOff,
-  Settings,
-  Wand2Icon,
-} from 'lucide-react';
-
 import { Button } from '@/components/plate-ui/button';
 import {
   Command,
@@ -38,6 +23,19 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/plate-ui/popover';
+import { cn } from '@udecode/cn';
+import { CopilotPlugin } from '@udecode/plate-ai/react';
+import { useEditorPlugin } from '@udecode/plate/react';
+import {
+  Check,
+  ChevronsUpDown,
+  ExternalLinkIcon,
+  Eye,
+  EyeOff,
+  Settings,
+  Wand2Icon,
+} from 'lucide-react';
+import { createContext, type ReactNode, useContext, useState } from 'react';
 
 interface Model {
   label: string;
@@ -63,40 +61,6 @@ export const models: Model[] = [
 const SettingsContext = createContext<SettingsContextType | undefined>(
   undefined
 );
-
-export function SettingsProvider({ children }: { children: ReactNode }) {
-  const [keys, setKeys] = useState({
-    openai: '',
-    uploadthing: '',
-  });
-  const [model, setModel] = useState<Model>(models[0]);
-
-  const setKey = (service: string, key: string) => {
-    setKeys((prev) => ({ ...prev, [service]: key }));
-  };
-
-  return (
-    <SettingsContext.Provider value={{ keys, model, setKey, setModel }}>
-      {children}
-    </SettingsContext.Provider>
-  );
-}
-
-export function useSettings() {
-  const context = useContext(SettingsContext);
-
-  return (
-    context ?? {
-      keys: {
-        openai: '',
-        uploadthing: '',
-      },
-      model: models[0],
-      setKey: () => {},
-      setModel: () => {},
-    }
-  );
-}
 
 export function SettingsDialog() {
   const { keys, model, setKey, setModel } = useSettings();
@@ -141,9 +105,9 @@ export function SettingsDialog() {
         </label>
         <Button
           asChild
+          className="absolute right-[28px] top-0 h-full"
           size="icon"
           variant="ghost"
-          className="absolute right-[28px] top-0 h-full"
         >
           <a
             className="flex items-center"
@@ -162,22 +126,22 @@ export function SettingsDialog() {
       </div>
 
       <Input
-        id={label}
         className="pr-10"
-        value={tempKeys[service]}
+        data-1p-ignore
+        id={label}
         onChange={(e) =>
           setTempKeys((prev) => ({ ...prev, [service]: e.target.value }))
         }
         placeholder=""
-        data-1p-ignore
         type={showKey[service] ? 'text' : 'password'}
+        value={tempKeys[service]}
       />
       <Button
-        size="icon"
-        variant="ghost"
         className="absolute right-0 top-0 h-full"
         onClick={() => toggleKeyVisibility(service)}
+        size="icon"
         type="button"
+        variant="ghost"
       >
         {showKey[service] ? (
           <EyeOff className="size-4" />
@@ -192,17 +156,17 @@ export function SettingsDialog() {
   );
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog onOpenChange={setOpen} open={open}>
       <DialogTrigger asChild>
         <Button
-          size="icon"
-          variant="default"
           className={cn(
             'group fixed bottom-4 right-4 z-50 size-10 overflow-hidden',
             'rounded-full shadow-md hover:shadow-lg',
             'transition-all duration-300 ease-in-out hover:w-[106px]'
           )}
           data-block-hide
+          size="icon"
+          variant="default"
         >
           <div className="flex size-full items-center justify-start gap-2">
             <Settings className="ml-1.5 size-4" />
@@ -246,14 +210,14 @@ export function SettingsDialog() {
                 >
                   Model
                 </label>
-                <Popover open={openModel} onOpenChange={setOpenModel}>
-                  <PopoverTrigger id="select-model" asChild>
+                <Popover onOpenChange={setOpenModel} open={openModel}>
+                  <PopoverTrigger asChild id="select-model">
                     <Button
+                      aria-expanded={openModel}
+                      className="w-full justify-between"
+                      role="combobox"
                       size="lg"
                       variant="outline"
-                      className="w-full justify-between"
-                      aria-expanded={openModel}
-                      role="combobox"
                     >
                       <code>{model.label}</code>
                       <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
@@ -268,11 +232,11 @@ export function SettingsDialog() {
                           {models.map((m) => (
                             <CommandItem
                               key={m.value}
-                              value={m.value}
                               onSelect={() => {
                                 setModel(m);
                                 setOpenModel(false);
                               }}
+                              value={m.value}
                             >
                               <Check
                                 className={cn(
@@ -308,7 +272,7 @@ export function SettingsDialog() {
             </div>
           </div> */}
 
-          <Button size="lg" className="w-full" type="submit">
+          <Button className="w-full" size="lg" type="submit">
             Save changes
           </Button>
         </form>
@@ -318,5 +282,39 @@ export function SettingsDialog() {
         </p>
       </DialogContent>
     </Dialog>
+  );
+}
+
+export function SettingsProvider({ children }: { children: ReactNode }) {
+  const [keys, setKeys] = useState({
+    openai: '',
+    uploadthing: '',
+  });
+  const [model, setModel] = useState<Model>(models[0]);
+
+  const setKey = (service: string, key: string) => {
+    setKeys((prev) => ({ ...prev, [service]: key }));
+  };
+
+  return (
+    <SettingsContext.Provider value={{ keys, model, setKey, setModel }}>
+      {children}
+    </SettingsContext.Provider>
+  );
+}
+
+export function useSettings() {
+  const context = useContext(SettingsContext);
+
+  return (
+    context ?? {
+      keys: {
+        openai: '',
+        uploadthing: '',
+      },
+      model: models[0],
+      setKey: () => {},
+      setModel: () => {},
+    }
   );
 }

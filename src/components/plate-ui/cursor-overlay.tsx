@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import { cn } from '@udecode/cn';
 import { RangeApi } from '@udecode/plate';
 import {
@@ -9,11 +7,12 @@ import {
   type CursorOverlayState,
   useCursorOverlay,
 } from '@udecode/plate-selection/react';
+import React from 'react';
 
 export function Cursor({
-  id,
   caretPosition,
   data,
+  id,
   selection,
   selectionRects,
 }: CursorOverlayState<CursorData>) {
@@ -25,12 +24,12 @@ export function Cursor({
       {selectionRects.map((position, i) => {
         return (
           <div
-            key={i}
             className={cn(
               'pointer-events-none absolute z-10',
               id === 'selection' && 'bg-brand/25',
               id === 'selection' && isCursor && 'bg-primary'
             )}
+            key={i}
             style={{
               ...selectionStyle,
               ...position,

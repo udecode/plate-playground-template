@@ -1,10 +1,9 @@
 'use client';
 
-import * as React from 'react';
-
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { cn, withRef } from '@udecode/cn';
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority';
+import * as React from 'react';
 
 export const Popover = PopoverPrimitive.Root;
 
@@ -32,9 +31,9 @@ export const PopoverContent = withRef<
 >(({ align = 'center', animate, className, sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
-      ref={ref}
-      className={cn(popoverVariants({ animate }), className)}
       align={align}
+      className={cn(popoverVariants({ animate }), className)}
+      ref={ref}
       sideOffset={sideOffset}
       {...props}
     />

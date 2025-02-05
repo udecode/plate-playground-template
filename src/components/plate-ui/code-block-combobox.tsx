@@ -1,16 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
-
 import { cn } from '@udecode/cn';
 import {
   useCodeBlockCombobox,
   useCodeBlockComboboxState,
 } from '@udecode/plate-code-block/react';
 import { Check, ChevronsUpDown } from 'lucide-react';
-
 // Prism must be imported before all language files
 import Prism from 'prismjs';
+import React, { useState } from 'react';
 
 import { Button } from './button';
 import {
@@ -31,10 +29,8 @@ import 'prismjs/components/prism-cpp.js';
 import 'prismjs/components/prism-csharp.js';
 import 'prismjs/components/prism-css.js';
 import 'prismjs/components/prism-dart.js';
-
 // import 'prismjs/components/prism-django.js';
 import 'prismjs/components/prism-docker.js';
-
 // import 'prismjs/components/prism-ejs.js';
 import 'prismjs/components/prism-erlang.js';
 import 'prismjs/components/prism-git.js';
@@ -55,7 +51,6 @@ import 'prismjs/components/prism-matlab.js';
 import 'prismjs/components/prism-mermaid.js';
 import 'prismjs/components/prism-objectivec.js';
 import 'prismjs/components/prism-perl.js';
-
 // import 'prismjs/components/prism-php.js';
 import 'prismjs/components/prism-powershell.js';
 import 'prismjs/components/prism-properties.js';
@@ -150,14 +145,14 @@ export function CodeBlockCombobox() {
   );
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover onOpenChange={setOpen} open={open}>
       <PopoverTrigger asChild>
         <Button
+          aria-expanded={open}
+          className="h-5 justify-between px-1 text-xs"
+          role="combobox"
           size="xs"
           variant="ghost"
-          className="h-5 justify-between px-1 text-xs"
-          aria-expanded={open}
-          role="combobox"
         >
           {state.value
             ? languages.find((language) => language.value === state.value)
@@ -169,22 +164,22 @@ export function CodeBlockCombobox() {
       <PopoverContent className="w-[200px] p-0">
         <Command shouldFilter={false}>
           <CommandInput
-            value={value}
             onValueChange={(value) => setValue(value)}
             placeholder="Search language..."
+            value={value}
           />
           <CommandEmpty>No language found.</CommandEmpty>
 
           <CommandList>
             {items.map((language) => (
               <CommandItem
-                key={language.value}
                 className="cursor-pointer"
-                value={language.value}
+                key={language.value}
                 onSelect={(_value) => {
                   commandItemProps.onSelect(_value);
                   setOpen(false);
                 }}
+                value={language.value}
               >
                 <Check
                   className={cn(

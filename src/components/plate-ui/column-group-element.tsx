@@ -1,17 +1,16 @@
 'use client';
 
-import React from 'react';
-
 import { cn, withRef } from '@udecode/cn';
+import { setColumns, type TColumnElement } from '@udecode/plate-layout';
+import { useDebouncePopoverOpen } from '@udecode/plate-layout/react';
 import {
   useEditorRef,
   useElement,
   useReadOnly,
   useRemoveNodeButton,
 } from '@udecode/plate/react';
-import { type TColumnElement, setColumns } from '@udecode/plate-layout';
-import { useDebouncePopoverOpen } from '@udecode/plate-layout/react';
 import { type LucideProps, Trash2Icon } from 'lucide-react';
+import React from 'react';
 
 import { Button } from './button';
 import { PlateElement } from './plate-element';
@@ -21,7 +20,7 @@ import { Separator } from './separator';
 export const ColumnGroupElement = withRef<typeof PlateElement>(
   ({ children, className, ...props }, ref) => {
     return (
-      <PlateElement ref={ref} className={cn(className, 'mb-2')} {...props}>
+      <PlateElement className={cn(className, 'mb-2')} ref={ref} {...props}>
         <ColumnFloatingToolbar>
           <div className={cn('flex size-full rounded')}>{children}</div>
         </ColumnFloatingToolbar>
@@ -49,53 +48,53 @@ export function ColumnFloatingToolbar({ children }: React.PropsWithChildren) {
   if (readOnly) return <>{children}</>;
 
   return (
-    <Popover open={isOpen} modal={false}>
+    <Popover modal={false} open={isOpen}>
       <PopoverAnchor>{children}</PopoverAnchor>
       <PopoverContent
+        align="center"
         className="w-auto p-1"
         onOpenAutoFocus={(e) => e.preventDefault()}
-        align="center"
         side="top"
         sideOffset={10}
       >
         <div className="box-content flex items-center [&_svg]:size-4 [&_svg]:text-muted-foreground">
           <Button
+            onClick={() => onColumnChange(['50%', '50%'])}
             size="icon"
             variant="ghost"
-            onClick={() => onColumnChange(['50%', '50%'])}
           >
             <DoubleColumnOutlined />
           </Button>
           <Button
+            onClick={() => onColumnChange(['33%', '33%', '33%'])}
             size="icon"
             variant="ghost"
-            onClick={() => onColumnChange(['33%', '33%', '33%'])}
           >
             <ThreeColumnOutlined />
           </Button>
           <Button
+            onClick={() => onColumnChange(['70%', '30%'])}
             size="icon"
             variant="ghost"
-            onClick={() => onColumnChange(['70%', '30%'])}
           >
             <RightSideDoubleColumnOutlined />
           </Button>
           <Button
+            onClick={() => onColumnChange(['30%', '70%'])}
             size="icon"
             variant="ghost"
-            onClick={() => onColumnChange(['30%', '70%'])}
           >
             <LeftSideDoubleColumnOutlined />
           </Button>
           <Button
+            onClick={() => onColumnChange(['25%', '50%', '25%'])}
             size="icon"
             variant="ghost"
-            onClick={() => onColumnChange(['25%', '50%', '25%'])}
           >
             <DoubleSideDoubleColumnOutlined />
           </Button>
 
-          <Separator orientation="vertical" className="mx-1 h-6" />
+          <Separator className="mx-1 h-6" orientation="vertical" />
           <Button size="icon" variant="ghost" {...buttonProps}>
             <Trash2Icon />
           </Button>

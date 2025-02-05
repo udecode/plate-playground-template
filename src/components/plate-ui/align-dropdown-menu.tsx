@@ -1,9 +1,6 @@
 'use client';
 
-import React from 'react';
-
 import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import {
   useAlignDropdownMenu,
   useAlignDropdownMenuState,
@@ -14,6 +11,7 @@ import {
   AlignLeftIcon,
   AlignRightIcon,
 } from 'lucide-react';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -56,15 +54,15 @@ export function AlignDropdownMenu({ children, ...props }: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Align" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Align">
           <IconValue />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="min-w-0" align="start">
+      <DropdownMenuContent align="start" className="min-w-0">
         <DropdownMenuRadioGroup {...radioGroupProps}>
           {items.map(({ icon: Icon, value: itemValue }) => (
-            <DropdownMenuRadioItem key={itemValue} value={itemValue} hideIcon>
+            <DropdownMenuRadioItem hideIcon key={itemValue} value={itemValue}>
               <Icon />
             </DropdownMenuRadioItem>
           ))}

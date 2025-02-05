@@ -1,10 +1,8 @@
-import React from 'react';
-
-import type { SlateElementProps } from '@udecode/plate';
-import type { TColumnElement } from '@udecode/plate-layout';
-
 import { cn } from '@udecode/cn';
+import type { SlateElementProps } from '@udecode/plate';
 import { SlateElement } from '@udecode/plate';
+import type { TColumnElement } from '@udecode/plate-layout';
+import React from 'react';
 
 export function ColumnElementStatic({
   children,

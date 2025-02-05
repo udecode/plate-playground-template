@@ -1,14 +1,11 @@
 'use client';
 
-import React from 'react';
-
-import type { TMentionElement } from '@udecode/plate-mention';
-
-import { cn, withRef } from '@udecode/cn';
-import { IS_APPLE, getHandler } from '@udecode/plate';
-import { useFocused, useReadOnly, useSelected } from '@udecode/plate/react';
-
 import { useMounted } from '@/hooks/use-mounted';
+import { cn, withRef } from '@udecode/cn';
+import { getHandler, IS_APPLE } from '@udecode/plate';
+import type { TMentionElement } from '@udecode/plate-mention';
+import { useFocused, useReadOnly, useSelected } from '@udecode/plate/react';
+import React from 'react';
 
 import { PlateElement } from './plate-element';
 
@@ -18,7 +15,7 @@ export const MentionElement = withRef<
     prefix?: string;
     onClick?: (mentionNode: any) => void;
   }
->(({ children, className, prefix, onClick, ...props }, ref) => {
+>(({ children, className, onClick, prefix, ...props }, ref) => {
   const element = props.element as TMentionElement;
   const selected = useSelected();
   const focused = useFocused();
@@ -27,7 +24,6 @@ export const MentionElement = withRef<
 
   return (
     <PlateElement
-      ref={ref}
       className={cn(
         className,
         'inline-block rounded-md bg-muted px-1.5 py-0.5 align-baseline text-sm font-medium',
@@ -37,10 +33,11 @@ export const MentionElement = withRef<
         element.children[0].italic === true && 'italic',
         element.children[0].underline === true && 'underline'
       )}
-      onClick={getHandler(onClick, element)}
-      data-slate-value={element.value}
       contentEditable={false}
+      data-slate-value={element.value}
       draggable
+      onClick={getHandler(onClick, element)}
+      ref={ref}
       {...props}
     >
       {mounted && IS_APPLE ? (

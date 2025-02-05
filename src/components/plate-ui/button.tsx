@@ -1,10 +1,9 @@
+import { Slot } from '@radix-ui/react-slot';
+import { cn } from '@udecode/cn';
+import { cva, type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
 
-import { Slot } from '@radix-ui/react-slot';
-import { cn, withRef } from '@udecode/cn';
-import { type VariantProps, cva } from 'class-variance-authority';
-
-export const buttonVariants = cva(
+const buttonVariants = cva(
   'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     defaultVariants: {
@@ -39,19 +38,28 @@ export const buttonVariants = cva(
   }
 );
 
-export const Button = withRef<
-  'button',
-  {
-    asChild?: boolean;
-  } & VariantProps<typeof buttonVariants>
->(({ asChild = false, className, isMenu, size, variant, ...props }, ref) => {
-  const Comp = asChild ? Slot : 'button';
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
+}
 
-  return (
-    <Comp
-      ref={ref}
-      className={cn(buttonVariants({ className, isMenu, size, variant }))}
-      {...props}
-    />
-  );
-});
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ asChild = false, className, size, variant, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+
+    const buttonType = Comp === 'button' ? ({ type: 'button' } as object) : {};
+
+    return (
+      <Comp
+        className={cn(buttonVariants({ className, size, variant }))}
+        ref={ref}
+        {...buttonType}
+        {...props}
+      />
+    );
+  }
+);
+Button.displayName = 'Button';
+
+export { Button, type ButtonProps, buttonVariants };

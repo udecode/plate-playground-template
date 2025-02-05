@@ -1,10 +1,8 @@
 'use client';
 
 import type { SlateEditor } from '@udecode/plate';
-import type { AutoformatRule } from '@udecode/plate-autoformat';
-
 import { ElementApi, isType } from '@udecode/plate';
-import { ParagraphPlugin } from '@udecode/plate/react';
+import type { AutoformatRule } from '@udecode/plate-autoformat';
 import {
   autoformatArrow,
   autoformatLegal,
@@ -37,7 +35,8 @@ import {
   ListStyleType,
   toggleIndentList,
 } from '@udecode/plate-indent-list';
-import { TogglePlugin, openNextToggles } from '@udecode/plate-toggle/react';
+import { openNextToggles, TogglePlugin } from '@udecode/plate-toggle/react';
+import { ParagraphPlugin } from '@udecode/plate/react';
 
 export const format = (editor: SlateEditor, customFormatting: any) => {
   if (editor.selection) {

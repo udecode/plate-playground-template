@@ -1,10 +1,9 @@
 'use client';
 
-import * as React from 'react';
-
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import { cn } from '@udecode/cn';
 import { Check, ChevronRight, Circle } from 'lucide-react';
+import * as React from 'react';
 
 const ContextMenu = ContextMenuPrimitive.Root;
 
@@ -54,12 +53,12 @@ const ContextMenuSubTrigger = React.forwardRef<
   }
 >(({ children, className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.SubTrigger
-    ref={ref}
     className={cn(
       'mx-1 flex h-[28px] cursor-default select-none items-center rounded-sm px-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent data-[state=open]:text-accent-foreground',
       inset && 'pl-8',
       className
     )}
+    ref={ref}
     {...props}
   >
     {children}
@@ -73,11 +72,11 @@ const ContextMenuSubContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>
 >(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.SubContent
-    ref={ref}
     className={cn(
       'z-50 min-w-32 overflow-hidden rounded-md border bg-popover py-1.5 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
       className
     )}
+    ref={ref}
     {...props}
   />
 ));
@@ -89,11 +88,11 @@ const ContextMenuContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.Portal>
     <ContextMenuPrimitive.Content
-      ref={ref}
       className={cn(
         'z-50 min-w-32 overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         className
       )}
+      ref={ref}
       {...props}
     />
   </ContextMenuPrimitive.Portal>
@@ -107,12 +106,12 @@ const ContextMenuItem = React.forwardRef<
   }
 >(({ className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.Item
-    ref={ref}
     className={cn(
       'relative mx-1 flex h-[28px] cursor-default select-none items-center rounded-sm px-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       inset && 'pl-8',
       className
     )}
+    ref={ref}
     {...props}
   />
 ));
@@ -123,12 +122,12 @@ const ContextMenuCheckboxItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
 >(({ checked, children, className, ...props }, ref) => (
   <ContextMenuPrimitive.CheckboxItem
-    ref={ref}
+    checked={checked}
     className={cn(
       'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}
-    checked={checked}
+    ref={ref}
     {...props}
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
@@ -147,11 +146,11 @@ const ContextMenuRadioItem = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>
 >(({ children, className, ...props }, ref) => (
   <ContextMenuPrimitive.RadioItem
-    ref={ref}
     className={cn(
       'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}
+    ref={ref}
     {...props}
   >
     <span className="absolute left-2 flex size-3.5 items-center justify-center">
@@ -171,12 +170,12 @@ const ContextMenuLabel = React.forwardRef<
   }
 >(({ className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.Label
-    ref={ref}
     className={cn(
       'px-2 py-1.5 text-sm font-semibold text-foreground',
       inset && 'pl-8',
       className
     )}
+    ref={ref}
     {...props}
   />
 ));
@@ -187,8 +186,8 @@ const ContextMenuSeparator = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.Separator
-    ref={ref}
     className={cn('-mx-1 my-1 h-px bg-border', className)}
+    ref={ref}
     {...props}
   />
 ));

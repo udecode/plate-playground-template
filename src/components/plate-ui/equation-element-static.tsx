@@ -1,11 +1,9 @@
-import React from 'react';
-
-import type { TEquationElement } from '@udecode/plate-math';
-
 import { cn } from '@udecode/cn';
-import { type SlateElementProps, SlateElement } from '@udecode/plate';
+import { SlateElement, type SlateElementProps } from '@udecode/plate';
+import type { TEquationElement } from '@udecode/plate-math';
 import { getEquationHtml } from '@udecode/plate-math';
 import { RadicalIcon } from 'lucide-react';
+import React from 'react';
 
 export function EquationElementStatic({
   children,

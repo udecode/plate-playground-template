@@ -1,9 +1,8 @@
 'use client';
 
-import React from 'react';
-
 import { withRef, withVariants } from '@udecode/cn';
 import { cva } from 'class-variance-authority';
+import React from 'react';
 
 import { PlateElement } from './plate-element';
 
@@ -28,8 +27,8 @@ export const HeadingElement = withRef<typeof HeadingElementVariants>(
   ({ children, variant = 'h1', ...props }, ref) => {
     return (
       <HeadingElementVariants
-        ref={ref}
         as={variant!}
+        ref={ref}
         variant={variant}
         {...props}
       >

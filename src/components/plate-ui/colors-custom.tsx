@@ -1,21 +1,19 @@
 'use client';
 
-import React, { type ComponentPropsWithoutRef } from 'react';
-
 import { cn } from '@udecode/cn';
 import {
   useColorsCustom,
   useColorsCustomState,
 } from '@udecode/plate-font/react';
 import { PlusIcon } from 'lucide-react';
+import React, { type ComponentPropsWithoutRef } from 'react';
 
 import { buttonVariants } from './button';
 import {
-  type TColor,
   ColorDropdownMenuItems,
+  type TColor,
 } from './color-dropdown-menu-items';
 import { ColorInput } from './color-input';
-
 // import { ColorInput } from './color-input';
 import { DropdownMenuItem } from './dropdown-menu';
 

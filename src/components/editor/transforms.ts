@@ -1,12 +1,10 @@
 'use client';
 
-import type { PlateEditor } from '@udecode/plate/react';
-
 import {
   type NodeEntry,
   type Path,
-  type TElement,
   PathApi,
+  type TElement,
 } from '@udecode/plate';
 import { insertCallout } from '@udecode/plate-callout';
 import { CalloutPlugin } from '@udecode/plate-callout/react';
@@ -44,6 +42,7 @@ import {
   TablePlugin,
   TableRowPlugin,
 } from '@udecode/plate-table/react';
+import type { PlateEditor } from '@udecode/plate/react';
 
 export const STRUCTURAL_TYPES: string[] = [
   ColumnPlugin.key,
@@ -77,12 +76,12 @@ const insertBlockMap: Record<
   [CodeBlockPlugin.key]: (editor) => insertCodeBlock(editor, { select: true }),
   [EquationPlugin.key]: (editor) => insertEquation(editor, { select: true }),
   [FilePlugin.key]: (editor) => insertFilePlaceholder(editor, { select: true }),
-  [INDENT_LIST_KEYS.todo]: insertList,
   [ImagePlugin.key]: (editor) =>
     insertMedia(editor, {
       select: true,
       type: ImagePlugin.key,
     }),
+  [INDENT_LIST_KEYS.todo]: insertList,
   [ListStyleType.Decimal]: insertList,
   [ListStyleType.Disc]: insertList,
   [MediaEmbedPlugin.key]: (editor) =>

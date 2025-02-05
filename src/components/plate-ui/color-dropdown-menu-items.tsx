@@ -1,11 +1,9 @@
 'use client';
 
-import React from 'react';
-
 import type { DropdownMenuItemProps } from '@radix-ui/react-dropdown-menu';
-
 import { cn } from '@udecode/cn';
 import { Check } from 'lucide-react';
+import React from 'react';
 
 import { buttonVariants } from './button';
 import { DropdownMenuItem } from './dropdown-menu';
@@ -17,18 +15,24 @@ import {
 } from './tooltip';
 
 export type TColor = {
-  isBrightColor: boolean;
   name: string;
   value: string;
+  isBrightColor: boolean;
 };
 
 type ColorDropdownMenuItemProps = {
-  isBrightColor: boolean;
   isSelected: boolean;
-  updateColor: (color: string) => void;
   value: string;
+  isBrightColor: boolean;
+  updateColor: (color: string) => void;
   name?: string;
 } & DropdownMenuItemProps;
+
+type ColorDropdownMenuItemsProps = {
+  colors: TColor[];
+  updateColor: (color: string) => void;
+  color?: string;
+} & React.HTMLAttributes<HTMLDivElement>;
 
 export function ColorDropdownMenuItem({
   className,
@@ -51,11 +55,11 @@ export function ColorDropdownMenuItem({
         !isBrightColor && 'border-transparent text-white hover:!text-white',
         className
       )}
-      style={{ backgroundColor: value }}
       onSelect={(e) => {
         e.preventDefault();
         updateColor(value);
       }}
+      style={{ backgroundColor: value }}
       {...props}
     >
       {isSelected ? <Check className="!size-3" /> : null}
@@ -71,12 +75,6 @@ export function ColorDropdownMenuItem({
     content
   );
 }
-
-type ColorDropdownMenuItemsProps = {
-  colors: TColor[];
-  updateColor: (color: string) => void;
-  color?: string;
-} & React.HTMLAttributes<HTMLDivElement>;
 
 export function ColorDropdownMenuItems({
   className,
@@ -96,12 +94,12 @@ export function ColorDropdownMenuItems({
       <TooltipProvider>
         {colors.map(({ isBrightColor, name, value }) => (
           <ColorDropdownMenuItem
-            name={name}
-            key={name ?? value}
-            value={value}
             isBrightColor={isBrightColor}
             isSelected={color === value}
+            key={name ?? value}
+            name={name}
             updateColor={updateColor}
+            value={value}
           />
         ))}
         {props.children}

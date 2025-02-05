@@ -1,14 +1,10 @@
 'use client';
 
-import React from 'react';
-
-import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-
 import {
-  type PlateEditor,
-  ParagraphPlugin,
-  useEditorRef,
-} from '@udecode/plate/react';
+  insertBlock,
+  insertInlineElement,
+} from '@/components/editor/transforms';
+import type { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
 import { BlockquotePlugin } from '@udecode/plate-block-quote/react';
 import { CodeBlockPlugin } from '@udecode/plate-code-block/react';
 import { DatePlugin } from '@udecode/plate-date/react';
@@ -25,6 +21,11 @@ import {
 import { ImagePlugin, MediaEmbedPlugin } from '@udecode/plate-media/react';
 import { TablePlugin } from '@udecode/plate-table/react';
 import { TogglePlugin } from '@udecode/plate-toggle/react';
+import {
+  ParagraphPlugin,
+  type PlateEditor,
+  useEditorRef,
+} from '@udecode/plate/react';
 import {
   CalendarIcon,
   ChevronRightIcon,
@@ -48,11 +49,7 @@ import {
   TableIcon,
   TableOfContentsIcon,
 } from 'lucide-react';
-
-import {
-  insertBlock,
-  insertInlineElement,
-} from '@/components/editor/transforms';
+import React from 'react';
 
 import {
   DropdownMenu,
@@ -65,16 +62,16 @@ import {
 import { ToolbarButton } from './toolbar';
 
 type Group = {
-  group: string;
   items: Item[];
+  group: string;
 };
 
 interface Item {
+  focusEditor?: boolean;
   icon: React.ReactNode;
+  label?: string;
   onSelect: (editor: PlateEditor, value: string) => void;
   value: string;
-  focusEditor?: boolean;
-  label?: string;
 }
 
 const groups: Group[] = [
@@ -245,21 +242,21 @@ export function InsertDropdownMenu(props: DropdownMenuProps) {
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip="Insert" isDropdown>
+        <ToolbarButton isDropdown pressed={openState.open} tooltip="Insert">
           <PlusIcon />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="flex max-h-[500px] min-w-0 flex-col overflow-y-auto"
         align="start"
+        className="flex max-h-[500px] min-w-0 flex-col overflow-y-auto"
       >
         {groups.map(({ group, items: nestedItems }) => (
           <DropdownMenuGroup key={group} label={group}>
-            {nestedItems.map(({ icon, label, value, onSelect }) => (
+            {nestedItems.map(({ icon, label, onSelect, value }) => (
               <DropdownMenuItem
-                key={value}
                 className="min-w-[180px]"
+                key={value}
                 onSelect={() => {
                   onSelect(editor, value);
                   editor.tf.focus();

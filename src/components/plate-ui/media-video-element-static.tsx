@@ -1,11 +1,9 @@
-import React from 'react';
-
+import { cn } from '@udecode/cn';
 import type { SlateElementProps } from '@udecode/plate';
+import { NodeApi, SlateElement } from '@udecode/plate';
 import type { TCaptionElement } from '@udecode/plate-caption';
 import type { TVideoElement } from '@udecode/plate-media';
-
-import { cn } from '@udecode/cn';
-import { NodeApi, SlateElement } from '@udecode/plate';
+import React from 'react';
 
 export function MediaVideoElementStatic({
   children,
@@ -31,8 +29,8 @@ export function MediaVideoElementStatic({
         >
           <video
             className={cn('w-full max-w-full object-cover px-0', 'rounded-sm')}
-            src={url}
             controls
+            src={url}
           />
           {caption && <figcaption>{NodeApi.string(caption[0])}</figcaption>}
         </figure>
