@@ -20,5 +20,5 @@ export const AIChatEditor = React.memo(function AIChatEditor({
 
   useAIChatEditor(aiEditor, content);
 
-  return <EditorStatic variant="aiChat" editor={aiEditor} />;
+  return <EditorStatic key={content?.length || 0} variant="aiChat" editor={aiEditor} />;
 });
