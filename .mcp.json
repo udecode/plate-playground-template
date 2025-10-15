@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "plate": {
-      "description": "Plate editors, plugins, components, and docs",
+      "description": "Plate editors, plugins and components",
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "shadcn@canary", "registry:mcp"],
